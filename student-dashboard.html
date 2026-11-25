@@ -1,0 +1,4490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Portal | College Complaint Management System</title>
+  
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS Stylesheets -->
+  <style>
+/* ==========================================================================
+   COLLEGE COMPLAINT MANAGEMENT SYSTEM (CCMS)
+   Modern, Clean, Responsive Design System (Navy Blue & Purple Theme)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Color Palette - Navy & Purple Accents */
+  --primary-navy: #0f172a;
+  --navy-dark: #0a0f1d;
+  --navy-light: #1e293b;
+  --navy-muted: #334155;
+  --navy-subtle: #475569;
+
+  --accent-purple: #7c3aed;
+  --accent-purple-hover: #6d28d9;
+  --accent-indigo: #4f46e5;
+  --accent-violet: #8b5cf6;
+  --accent-purple-light: #ede9fe;
+  --accent-purple-soft: rgba(124, 58, 237, 0.08);
+
+  --brand-blue: #2563eb;
+  --brand-blue-light: #eff6ff;
+
+  /* Neutrals */
+  --bg-body: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-input: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --border-light: #e2e8f0;
+  --border-focus: #7c3aed;
+
+  /* Status Colors */
+  --status-pending-bg: #fffbeb;
+  --status-pending-text: #b45309;
+  --status-pending-border: #fcd34d;
+
+  --status-progress-bg: #f5f3ff;
+  --status-progress-text: #6d28d9;
+  --status-progress-border: #c4b5fd;
+
+  --status-resolved-bg: #ecfdf5;
+  --status-resolved-text: #047857;
+  --status-resolved-border: #a7f3d0;
+
+  --priority-urgent-bg: #fef2f2;
+  --priority-urgent-text: #b91c1c;
+  --priority-high-bg: #fff7ed;
+  --priority-high-text: #c2410c;
+  --priority-medium-bg: #eff6ff;
+  --priority-medium-text: #1d4ed8;
+  --priority-low-bg: #f1f5f9;
+  --priority-low-text: #475569;
+
+  /* Gradients */
+  --grad-navy-purple: linear-gradient(135deg, #0f172a 0%, #1e1b4b 60%, #31104b 100%);
+  --grad-purple-indigo: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+  --grad-card-glow: linear-gradient(180deg, rgba(124, 58, 237, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 2px 4px -1px rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 6px 16px -2px rgba(15, 23, 42, 0.08), 0 2px 6px -2px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 12px 28px -4px rgba(15, 23, 42, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.05);
+  --shadow-purple: 0 8px 24px -4px rgba(124, 58, 237, 0.25);
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-full: 9999px;
+
+  /* Typography */
+  --font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+  transition: var(--transition);
+}
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Modern Typography Utilities */
+.text-gradient {
+  background: var(--grad-purple-indigo);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-navy {
+  color: var(--primary-navy);
+}
+
+.text-purple {
+  color: var(--accent-purple);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+/* Header & Top Navigation Bar */
+.site-header {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-light);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-xs);
+  backdrop-filter: blur(12px);
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--primary-navy);
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--grad-navy-purple);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 10px rgba(124, 58, 237, 0.3);
+}
+
+.brand-text-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.brand-subtitle {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  list-style: none;
+}
+
+.nav-link {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--navy-subtle);
+  padding: 0.5rem 0.25rem;
+  position: relative;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--accent-purple);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent-purple);
+  border-radius: 2px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+/* Button Component Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.btn-sm {
+  padding: 0.45rem 0.85rem;
+  font-size: 0.82rem;
+}
+
+.btn-lg {
+  padding: 0.85rem 1.75rem;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: var(--grad-purple-indigo);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #6d28d9 0%, #4338ca 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(124, 58, 237, 0.35);
+}
+
+.btn-navy {
+  background: var(--primary-navy);
+  color: #ffffff;
+}
+
+.btn-navy:hover {
+  background: var(--navy-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25);
+}
+
+.btn-outline {
+  border: 1.5px solid var(--border-light);
+  color: var(--primary-navy);
+  background: #ffffff;
+}
+
+.btn-outline:hover {
+  border-color: var(--accent-purple);
+  color: var(--accent-purple);
+  background: var(--accent-purple-soft);
+}
+
+.btn-subtle {
+  background: #f1f5f9;
+  color: var(--navy-muted);
+}
+
+.btn-subtle:hover {
+  background: #e2e8f0;
+  color: var(--primary-navy);
+}
+
+.btn-danger {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.btn-danger:hover {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.btn-success {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.btn-success:hover {
+  background: #10b981;
+  color: #ffffff;
+}
+
+/* Pill Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+}
+
+.badge-pending {
+  background: var(--status-pending-bg);
+  color: var(--status-pending-text);
+  border: 1px solid var(--status-pending-border);
+}
+
+.badge-progress {
+  background: var(--status-progress-bg);
+  color: var(--status-progress-text);
+  border: 1px solid var(--status-progress-border);
+}
+
+.badge-resolved {
+  background: var(--status-resolved-bg);
+  color: var(--status-resolved-text);
+  border: 1px solid var(--status-resolved-border);
+}
+
+.badge-priority-urgent {
+  background: var(--priority-urgent-bg);
+  color: var(--priority-urgent-text);
+}
+
+.badge-priority-high {
+  background: var(--priority-high-bg);
+  color: var(--priority-high-text);
+}
+
+.badge-priority-medium {
+  background: var(--priority-medium-bg);
+  color: var(--priority-medium-text);
+}
+
+.badge-priority-low {
+  background: var(--priority-low-bg);
+  color: var(--priority-low-text);
+}
+
+.badge-category {
+  background: #f1f5f9;
+  color: var(--navy-muted);
+  font-weight: 600;
+  font-size: 0.78rem;
+  border: 1px solid #e2e8f0;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--primary-navy);
+  margin-bottom: 0.45rem;
+}
+
+.form-label .required {
+  color: #ef4444;
+  margin-left: 0.25rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-input);
+  color: var(--text-main);
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  border-color: var(--accent-purple);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+.form-control::placeholder {
+  color: var(--text-light);
+}
+
+.form-control.is-invalid {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+.invalid-feedback {
+  color: #dc2626;
+  font-size: 0.78rem;
+  margin-top: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Category Grid Select */
+.category-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.65rem;
+  margin-top: 0.35rem;
+}
+
+.category-option-card {
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 0.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.category-option-card i {
+  font-size: 1.35rem;
+  color: var(--navy-subtle);
+  transition: var(--transition);
+}
+
+.category-option-card span {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--navy-muted);
+}
+
+.category-option-card:hover {
+  border-color: var(--accent-purple);
+  background: var(--accent-purple-soft);
+  transform: translateY(-2px);
+}
+
+.category-option-card.selected {
+  border-color: var(--accent-purple);
+  background: var(--accent-purple-light);
+  box-shadow: 0 4px 10px rgba(124, 58, 237, 0.18);
+}
+
+.category-option-card.selected i {
+  color: var(--accent-purple);
+}
+
+.category-option-card.selected span {
+  color: var(--accent-purple);
+  font-weight: 700;
+}
+
+/* Hero Section */
+.hero-section {
+  background: var(--grad-navy-purple);
+  color: #ffffff;
+  padding: 4.5rem 0 5.5rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-glow-1 {
+  position: absolute;
+  top: -100px;
+  right: -50px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.35) 0%, rgba(15, 23, 42, 0) 70%);
+  pointer-events: none;
+}
+
+.hero-glow-2 {
+  position: absolute;
+  bottom: -150px;
+  left: -50px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(79, 70, 229, 0.3) 0%, rgba(15, 23, 42, 0) 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(8px);
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+}
+
+.hero-title span {
+  background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 60%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+  font-size: 1.15rem;
+  color: #cbd5e1;
+  max-width: 680px;
+  margin: 0 auto 2.25rem auto;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Quick Status Search Card (Overlapping Hero) */
+.quick-status-wrap {
+  position: relative;
+  margin-top: -2.5rem;
+  z-index: 10;
+  margin-bottom: 3.5rem;
+}
+
+.quick-status-card {
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: 1.5rem 2rem;
+  border: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.quick-status-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.quick-status-icon {
+  width: 52px;
+  height: 52px;
+  background: var(--accent-purple-light);
+  color: var(--accent-purple);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.45rem;
+}
+
+.quick-status-text h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+}
+
+.quick-status-text p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.quick-status-form {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex: 1;
+  max-width: 500px;
+  min-width: 280px;
+}
+
+.quick-status-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+}
+
+/* Features Grid */
+.section {
+  padding: 4.5rem 0;
+}
+
+.section-title-wrap {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 3rem auto;
+}
+
+.section-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-purple);
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.section-title {
+  font-size: 2.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--primary-navy);
+  margin-bottom: 0.75rem;
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* Category Showcase Cards */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.category-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.5rem;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.category-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--grad-purple-indigo);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+.category-card:hover::after {
+  opacity: 1;
+}
+
+.category-icon-box {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-md);
+  background: var(--accent-purple-light);
+  color: var(--accent-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  margin-bottom: 1.25rem;
+}
+
+.category-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+  margin-bottom: 0.5rem;
+}
+
+.category-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+  flex: 1;
+}
+
+/* How It Works Steps */
+.workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  position: relative;
+}
+
+.workflow-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 1.75rem;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.workflow-step-num {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #f1f5f9;
+  line-height: 1;
+}
+
+.workflow-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: var(--radius-lg);
+  background: var(--grad-navy-purple);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.45rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.2);
+}
+
+.workflow-card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+  margin-bottom: 0.65rem;
+}
+
+.workflow-card p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+/* Demo Credentials Callout Banner */
+.demo-banner-box {
+  background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem;
+  color: #ffffff;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.demo-banner-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.demo-banner-badge {
+  background: rgba(124, 58, 237, 0.25);
+  border: 1px solid rgba(167, 139, 250, 0.4);
+  color: #c4b5fd;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+}
+
+.demo-banner-box h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.demo-banner-box p {
+  color: #cbd5e1;
+  font-size: 0.92rem;
+  margin-bottom: 1.75rem;
+  max-width: 650px;
+}
+
+.demo-accounts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.demo-account-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  backdrop-filter: blur(8px);
+}
+
+.demo-account-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.demo-role-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+}
+
+.demo-role-pill.student {
+  background: rgba(79, 70, 229, 0.25);
+  color: #a5b4fc;
+  border: 1px solid rgba(99, 102, 241, 0.4);
+}
+
+.demo-role-pill.admin {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fde68a;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.demo-account-card h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.demo-account-card .meta-field {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.35rem;
+}
+
+.demo-account-card .meta-field span:last-child {
+  color: #f8fafc;
+  font-family: monospace;
+}
+
+/* Modals */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-card {
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 580px;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: translateY(20px) scale(0.97);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--border-light);
+}
+
+.modal-backdrop.active .modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.modal-card-lg {
+  max-width: 820px;
+}
+
+.modal-header {
+  padding: 1.5rem 1.75rem;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.modal-title-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  background: var(--accent-purple-light);
+  color: var(--accent-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+}
+
+.modal-close-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.modal-close-btn:hover {
+  background: #f1f5f9;
+  color: var(--primary-navy);
+}
+
+.modal-body {
+  padding: 1.75rem;
+}
+
+.modal-footer {
+  padding: 1.25rem 1.75rem;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.85rem;
+  background-color: #fafbfc;
+  border-bottom-left-radius: var(--radius-xl);
+  border-bottom-right-radius: var(--radius-xl);
+}
+
+/* Tabs inside Modal or Pages */
+.auth-nav-tabs {
+  display: flex;
+  border-bottom: 2px solid var(--border-light);
+  margin-bottom: 1.5rem;
+}
+
+.auth-nav-tab {
+  flex: 1;
+  text-align: center;
+  padding: 0.85rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.auth-nav-tab:hover {
+  color: var(--accent-purple);
+}
+
+.auth-nav-tab.active {
+  color: var(--accent-purple);
+  border-bottom-color: var(--accent-purple);
+}
+
+/* Toast Notifications System */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  pointer-events: none;
+}
+
+.toast {
+  background: #ffffff;
+  color: var(--primary-navy);
+  padding: 0.95rem 1.25rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  border-left: 4px solid var(--accent-purple);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  min-width: 300px;
+  max-width: 420px;
+  pointer-events: auto;
+  transform: translateX(120%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+  opacity: 0;
+}
+
+.toast.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.toast-success {
+  border-left-color: #10b981;
+}
+
+.toast-success .toast-icon {
+  color: #10b981;
+}
+
+.toast-error {
+  border-left-color: #ef4444;
+}
+
+.toast-error .toast-icon {
+  color: #ef4444;
+}
+
+.toast-info {
+  border-left-color: #3b82f6;
+}
+
+.toast-info .toast-icon {
+  color: #3b82f6;
+}
+
+.toast-icon {
+  font-size: 1.25rem;
+  color: var(--accent-purple);
+  margin-top: 0.15rem;
+}
+
+.toast-content {
+  flex: 1;
+}
+
+.toast-title {
+  font-weight: 700;
+  font-size: 0.92rem;
+  margin-bottom: 0.2rem;
+}
+
+.toast-message {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Footer */
+.site-footer {
+  background: var(--navy-dark);
+  color: #94a3b8;
+  padding: 3.5rem 0 2rem 0;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.footer-brand h4 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+}
+
+.footer-brand p {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  max-width: 340px;
+}
+
+.footer-links h5 {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.footer-links ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-links a {
+  font-size: 0.88rem;
+  color: #94a3b8;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 992px) {
+  .hero-title {
+    font-size: 2.35rem;
+  }
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  .hero-title {
+    font-size: 1.95rem;
+  }
+  .hero-section {
+    padding: 3rem 0 4rem 0;
+  }
+  .quick-status-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .quick-status-form {
+    max-width: 100%;
+  }
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* ==========================================================================
+   COLLEGE COMPLAINT MANAGEMENT SYSTEM (CCMS)
+   Dashboard Layout & Advanced Component Styles (Student & Admin)
+   ========================================================================== */
+
+/* App Layout Structure */
+.app-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-body);
+}
+
+/* Sidebar Styles */
+.app-sidebar {
+  width: 270px;
+  background: var(--navy-dark);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sidebar-header {
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #ffffff;
+}
+
+.sidebar-brand-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  background: var(--grad-purple-indigo);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+}
+
+.sidebar-brand-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.sidebar-brand-role {
+  font-size: 0.7rem;
+  color: #a5b4fc;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sidebar-close-btn {
+  display: none;
+  color: #94a3b8;
+  font-size: 1.25rem;
+}
+
+.sidebar-nav {
+  padding: 1.25rem 0.85rem;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.sidebar-section-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: #64748b;
+  padding: 0.75rem 0.75rem 0.35rem 0.75rem;
+}
+
+.nav-item-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  color: #94a3b8;
+  font-size: 0.92rem;
+  font-weight: 600;
+  width: 100%;
+  text-align: left;
+  transition: var(--transition);
+  position: relative;
+}
+
+.nav-item-btn i {
+  font-size: 1.15rem;
+  width: 22px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.nav-item-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+.nav-item-btn.active {
+  background: var(--grad-purple-indigo);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+}
+
+.nav-item-btn.active i {
+  color: #ffffff;
+}
+
+.nav-item-badge {
+  margin-left: auto;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 0.72rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+}
+
+.sidebar-footer {
+  padding: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.sidebar-user-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.user-avatar-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  background: var(--accent-purple);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.user-meta-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-meta-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-meta-sub {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Main Dashboard Canvas */
+.app-main {
+  flex: 1;
+  margin-left: 270px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Top Navigation Bar */
+.dashboard-topbar {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-light);
+  height: 70px;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  box-shadow: var(--shadow-xs);
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.sidebar-toggle-btn {
+  display: none;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  background: #f1f5f9;
+  color: var(--primary-navy);
+  font-size: 1.15rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.topbar-search-wrap {
+  position: relative;
+  width: 320px;
+}
+
+.topbar-search-wrap i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.topbar-search-input {
+  width: 100%;
+  padding: 0.55rem 1rem 0.55rem 2.4rem;
+  background: #f8fafc;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  transition: var(--transition);
+}
+
+.topbar-search-input:focus {
+  background: #ffffff;
+  border-color: var(--accent-purple);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+}
+
+/* Notifications Popover */
+.notif-btn-wrap {
+  position: relative;
+}
+
+.notif-trigger-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: #f8fafc;
+  border: 1px solid var(--border-light);
+  color: var(--navy-muted);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: var(--transition);
+}
+
+.notif-trigger-btn:hover {
+  background: var(--accent-purple-light);
+  color: var(--accent-purple);
+}
+
+.notif-badge-count {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+}
+
+.notif-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 360px;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-light);
+  z-index: 200;
+  display: none;
+  animation: slideDown 0.2s ease-out;
+}
+
+.notif-dropdown.show {
+  display: block;
+}
+
+.notif-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notif-header h5 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+}
+
+.notif-list {
+  max-height: 320px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.notif-item {
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  gap: 0.75rem;
+  transition: var(--transition);
+}
+
+.notif-item:hover {
+  background: #f8fafc;
+}
+
+.notif-item.unread {
+  background: rgba(124, 58, 237, 0.04);
+}
+
+.notif-item-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  background: var(--accent-purple-light);
+  color: var(--accent-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.notif-item-body h6 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+  margin-bottom: 0.15rem;
+}
+
+.notif-item-body p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+  margin-bottom: 0.25rem;
+}
+
+.notif-item-time {
+  font-size: 0.7rem;
+  color: var(--text-light);
+}
+
+.notif-empty {
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+/* Dashboard Body Content */
+.dashboard-content {
+  padding: 2rem;
+  flex: 1;
+}
+
+.dashboard-header-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.page-title-wrap h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--primary-navy);
+  margin-bottom: 0.25rem;
+}
+
+.page-title-wrap p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+/* Metric Statistics Cards */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(124, 58, 237, 0.25);
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--grad-purple-indigo);
+}
+
+.stat-card.stat-pending::before {
+  background: #f59e0b;
+}
+
+.stat-card.stat-progress::before {
+  background: var(--accent-purple);
+}
+
+.stat-card.stat-resolved::before {
+  background: #10b981;
+}
+
+.stat-info-wrap .stat-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.35rem;
+}
+
+.stat-info-wrap .stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.stat-info-wrap .stat-trend {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.stat-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.45rem;
+}
+
+.stat-card.stat-total .stat-icon-box {
+  background: var(--accent-purple-light);
+  color: var(--accent-purple);
+}
+
+.stat-card.stat-pending .stat-icon-box {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+.stat-card.stat-progress .stat-icon-box {
+  background: #f5f3ff;
+  color: #7c3aed;
+}
+
+.stat-card.stat-resolved .stat-icon-box {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+/* Charts & Analytics Grid */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1.9fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.chart-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.chart-card-header h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+}
+
+.chart-canvas-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 250px;
+}
+
+/* Data Table Card */
+.table-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.table-card-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.table-card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.table-card-title h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+}
+
+.table-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.filter-select {
+  padding: 0.45rem 0.85rem;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  color: var(--navy-muted);
+  background: #ffffff;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.custom-table th {
+  background: #f8fafc;
+  padding: 0.85rem 1.25rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--navy-muted);
+  border-bottom: 1px solid var(--border-light);
+  white-space: nowrap;
+}
+
+.custom-table td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.88rem;
+  color: var(--navy-dark);
+  vertical-align: middle;
+}
+
+.custom-table tr:hover td {
+  background-color: #fafbfc;
+}
+
+.table-id-pill {
+  font-family: monospace;
+  font-weight: 700;
+  color: var(--accent-purple);
+  background: var(--accent-purple-light);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.table-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+/* Stepper / Timeline Tracker */
+.tracker-box {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.stepper-progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  margin: 2.5rem 0 3rem 0;
+}
+
+.stepper-progress-bar::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #e2e8f0;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.stepper-progress-fill {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 4px;
+  background: var(--grad-purple-indigo);
+  transform: translateY(-50%);
+  z-index: 2;
+  transition: width 0.5s ease-in-out;
+}
+
+.step-node {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: #ffffff;
+  border: 3px solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #64748b;
+  transition: var(--transition);
+  font-size: 1rem;
+}
+
+.step-node.active .step-circle {
+  border-color: var(--accent-purple);
+  background: var(--accent-purple);
+  color: #ffffff;
+  box-shadow: 0 0 0 6px rgba(124, 58, 237, 0.18);
+}
+
+.step-node.completed .step-circle {
+  border-color: #10b981;
+  background: #10b981;
+  color: #ffffff;
+}
+
+.step-label {
+  position: absolute;
+  top: 54px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--navy-muted);
+  white-space: nowrap;
+  text-align: center;
+}
+
+.step-node.active .step-label {
+  color: var(--accent-purple);
+}
+
+.step-node.completed .step-label {
+  color: #059669;
+}
+
+/* History Timeline inside modal */
+.history-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+  padding-left: 1.75rem;
+  margin-top: 1rem;
+}
+
+.history-timeline::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 7px;
+  width: 2px;
+  background: #e2e8f0;
+}
+
+.timeline-event {
+  position: relative;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -1.75rem;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-full);
+  background: #ffffff;
+  border: 3px solid var(--accent-purple);
+}
+
+.timeline-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+}
+
+.timeline-time {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+.timeline-desc {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* Tab View Panels */
+.tab-view-panel {
+  display: none;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.tab-view-panel.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Dashboard Styles */
+@media (max-width: 1024px) {
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .app-sidebar {
+    transform: translateX(-100%);
+  }
+  .app-sidebar.show {
+    transform: translateX(0);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+  }
+  .sidebar-close-btn {
+    display: block;
+  }
+  .app-main {
+    margin-left: 0;
+  }
+  .sidebar-toggle-btn {
+    display: inline-flex;
+  }
+  .topbar-search-wrap {
+    display: none;
+  }
+  .dashboard-content {
+    padding: 1.25rem;
+  }
+  .stepper-progress-bar {
+    margin: 1.5rem 0 3.5rem 0;
+  }
+  .step-label {
+    font-size: 0.72rem;
+  }
+}
+
+</style>
+</head>
+<body>
+
+  <div class="app-wrapper">
+
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-header">
+        <a href="student-dashboard.html" class="sidebar-brand">
+          <div class="sidebar-brand-icon">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <div>
+            <div class="sidebar-brand-title">CCMS PORTAL</div>
+            <div class="sidebar-brand-role">Student Dashboard</div>
+          </div>
+        </a>
+        <button class="sidebar-close-btn" id="closeSidebarBtn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="sidebar-section-label">Main Navigation</div>
+
+        <button class="nav-item-btn active" data-tab="overview">
+          <i class="fa-solid fa-gauge-high"></i>
+          <span>Dashboard Overview</span>
+        </button>
+
+        <button class="nav-item-btn" data-tab="new-complaint">
+          <i class="fa-solid fa-circle-plus"></i>
+          <span>Submit Grievance</span>
+          <span class="nav-item-badge">New</span>
+        </button>
+
+        <button class="nav-item-btn" data-tab="my-complaints">
+          <i class="fa-solid fa-folder-open"></i>
+          <span>My Complaints</span>
+        </button>
+
+        <button class="nav-item-btn" data-tab="track">
+          <i class="fa-solid fa-timeline"></i>
+          <span>Track Status</span>
+        </button>
+
+        <div class="sidebar-section-label">Account &amp; Info</div>
+
+        <button class="nav-item-btn" data-tab="profile">
+          <i class="fa-solid fa-id-card"></i>
+          <span>Student Profile</span>
+        </button>
+
+        <a href="index.html" class="nav-item-btn">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Public Portal</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user-card">
+          <div class="user-avatar-circle" id="studentAvatarCircle">AC</div>
+          <div class="user-meta-info">
+            <div class="user-meta-name" id="studentNameDisplay">Alex Chen</div>
+            <div class="user-meta-sub" id="studentRollDisplay">CS-2023-042</div>
+          </div>
+          <button id="logoutBtn" style="color:#ef4444; font-size:1.1rem; padding:0.25rem;" title="Sign Out">
+            <i class="fa-solid fa-power-off"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Canvas Area -->
+    <main class="app-main">
+      
+      <!-- Top Navigation Bar -->
+      <header class="dashboard-topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle-btn" id="sidebarToggle">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          
+          <div style="font-weight:700; color:var(--primary-navy); font-size:1.05rem;">
+            Welcome, <span id="studentWelcomeName" class="text-purple">Alex Chen</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Notification Bell -->
+          <div class="notif-btn-wrap">
+            <button class="notif-trigger-btn" id="notifTriggerBtn" title="Notifications">
+              <i class="fa-regular fa-bell"></i>
+              <span class="notif-badge-count" id="notifBadgeCount" style="display:none;">0</span>
+            </button>
+
+            <!-- Notifications Dropdown -->
+            <div class="notif-dropdown" id="notifDropdown">
+              <div class="notif-header">
+                <h5>Status Updates &amp; Alerts</h5>
+                <button class="btn btn-subtle btn-sm" id="markAllReadBtn" style="font-size:0.75rem; padding:0.2rem 0.5rem;">
+                  Mark all read
+                </button>
+              </div>
+              <ul class="notif-list" id="notifItemsList">
+                <!-- Injected via student.js -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- Quick Action to Submit -->
+          <button class="btn btn-primary btn-sm" onclick="StudentApp.switchTab('new-complaint')">
+            <i class="fa-solid fa-plus"></i> New Complaint
+          </button>
+        </div>
+      </header>
+
+      <!-- Dashboard Content Body -->
+      <div class="dashboard-content">
+
+        <!-- ==========================================
+             TAB 1: DASHBOARD OVERVIEW
+             ========================================== -->
+        <section class="tab-view-panel active" id="tab-overview">
+          
+          <div class="dashboard-header-banner">
+            <div class="page-title-wrap">
+              <h1>Student Dashboard Overview</h1>
+              <p>Review the real-time status of your logged grievances and institutional updates.</p>
+            </div>
+            <div>
+              <span class="badge" style="background:#e0e7ff; color:#3730a3; font-size:0.85rem; padding:0.4rem 0.85rem;">
+                <i class="fa-solid fa-shield-halved"></i> Grievance Redressal Cell Active
+              </span>
+            </div>
+          </div>
+
+          <!-- 4 Stat Metric Cards -->
+          <div class="stats-grid">
+            <div class="stat-card stat-total">
+              <div class="stat-info-wrap">
+                <div class="stat-label">Total Submitted</div>
+                <div class="stat-value" id="statStudentTotal">0</div>
+                <div class="stat-trend"><i class="fa-solid fa-list-check"></i> Lifetime grievances</div>
+              </div>
+              <div class="stat-icon-box">
+                <i class="fa-solid fa-clipboard-list"></i>
+              </div>
+            </div>
+
+            <div class="stat-card stat-pending">
+              <div class="stat-info-wrap">
+                <div class="stat-label">Pending Review</div>
+                <div class="stat-value" id="statStudentPending">0</div>
+                <div class="stat-trend"><i class="fa-regular fa-clock"></i> Awaiting officer action</div>
+              </div>
+              <div class="stat-icon-box">
+                <i class="fa-regular fa-hourglass-half"></i>
+              </div>
+            </div>
+
+            <div class="stat-card stat-progress">
+              <div class="stat-info-wrap">
+                <div class="stat-label">In Progress</div>
+                <div class="stat-value" id="statStudentProgress">0</div>
+                <div class="stat-trend"><i class="fa-solid fa-wrench"></i> Being resolved</div>
+              </div>
+              <div class="stat-icon-box">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+              </div>
+            </div>
+
+            <div class="stat-card stat-resolved">
+              <div class="stat-info-wrap">
+                <div class="stat-label">Resolved</div>
+                <div class="stat-value" id="statStudentResolved">0</div>
+                <div class="stat-trend"><i class="fa-solid fa-circle-check"></i> Successfully closed</div>
+              </div>
+              <div class="stat-icon-box">
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions & CTA Banner -->
+          <div style="background:var(--grad-navy-purple); border-radius:var(--radius-lg); padding:1.75rem 2rem; color:#ffffff; margin-bottom:2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.25rem;">
+            <div>
+              <span class="badge" style="background:rgba(255,255,255,0.15); color:#ffffff; margin-bottom:0.5rem;">
+                <i class="fa-solid fa-bullhorn"></i> Campus Service Alert
+              </span>
+              <h3 style="font-size:1.35rem; font-weight:800; margin-bottom:0.25rem;">Facing a Facility or Maintenance Issue?</h3>
+              <p style="font-size:0.88rem; color:#cbd5e1; max-width:560px;">
+                Report broken equipment in classrooms, Wi-Fi outages, drinking water filters, or transportation delays. Official campus teams respond within 24 hours.
+              </p>
+            </div>
+            <button class="btn btn-primary btn-lg" onclick="StudentApp.switchTab('new-complaint')">
+              <i class="fa-solid fa-file-circle-plus"></i> Submit New Complaint
+            </button>
+          </div>
+
+          <!-- Recent Complaints Mini Table -->
+          <div class="table-card">
+            <div class="table-card-header">
+              <div class="table-card-title">
+                <i class="fa-solid fa-clock-rotate-left text-purple"></i>
+                <h3>Recently Lodged Complaints</h3>
+              </div>
+              <button class="btn btn-subtle btn-sm" onclick="StudentApp.switchTab('my-complaints')">
+                View All Complaints <i class="fa-solid fa-arrow-right" style="margin-left:4px;"></i>
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Complaint ID</th>
+                    <th>Title &amp; Location</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="recentComplaintsOverviewBody">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             TAB 2: SUBMIT NEW COMPLAINT
+             ========================================== -->
+        <section class="tab-view-panel" id="tab-new-complaint">
+          
+          <div class="dashboard-header-banner">
+            <div class="page-title-wrap">
+              <h1>Submit a New Grievance</h1>
+              <p>Provide specific details and location coordinates to ensure rapid maintenance dispatch.</p>
+            </div>
+          </div>
+
+          <div style="background:#ffffff; border-radius:var(--radius-lg); border:1px solid var(--border-light); padding:2rem; box-shadow:var(--shadow-sm); max-width:880px;">
+            <form id="newComplaintForm">
+              
+              <!-- 1. Category Selection -->
+              <div class="form-group">
+                <label class="form-label">
+                  Select Facility Category <span class="required">*</span>
+                </label>
+                <div class="category-picker-grid">
+                  <div class="category-option-card selected" data-category="Classroom">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    <span>Classroom</span>
+                  </div>
+                  <div class="category-option-card" data-category="Laboratory">
+                    <i class="fa-solid fa-flask-vial"></i>
+                    <span>Laboratory</span>
+                  </div>
+                  <div class="category-option-card" data-category="College Wi-Fi">
+                    <i class="fa-solid fa-wifi"></i>
+                    <span>College Wi-Fi</span>
+                  </div>
+                  <div class="category-option-card" data-category="Drinking Water">
+                    <i class="fa-solid fa-glass-water"></i>
+                    <span>Drinking Water</span>
+                  </div>
+                  <div class="category-option-card" data-category="Washroom">
+                    <i class="fa-solid fa-restroom"></i>
+                    <span>Washroom</span>
+                  </div>
+                  <div class="category-option-card" data-category="Library">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                    <span>Library</span>
+                  </div>
+                  <div class="category-option-card" data-category="Transportation">
+                    <i class="fa-solid fa-bus-simple"></i>
+                    <span>Transportation</span>
+                  </div>
+                  <div class="category-option-card" data-category="Other">
+                    <i class="fa-solid fa-cubes"></i>
+                    <span>Other</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. Complaint Title -->
+              <div class="form-group">
+                <label class="form-label" for="complaintTitle">
+                  Complaint Subject / Summary <span class="required">*</span>
+                </label>
+                <input type="text" class="form-control" id="complaintTitle" placeholder="e.g. Projector HDMI port broken in LH-204" required>
+                <div class="invalid-feedback">Please enter a concise title of at least 5 characters.</div>
+              </div>
+
+              <!-- 3. Location and Priority Grid -->
+              <div style="display:grid; grid-template-columns:2fr 1fr; gap:1.25rem;">
+                <div class="form-group">
+                  <label class="form-label" for="complaintLocation">
+                    Exact Campus Location / Room <span class="required">*</span>
+                  </label>
+                  <input type="text" class="form-control" id="complaintLocation" placeholder="e.g. Science Block C, 3rd Floor, Room 302" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="complaintPriority">
+                    Priority Level <span class="required">*</span>
+                  </label>
+                  <select class="form-control" id="complaintPriority" required>
+                    <option value="Low">Low - Minor Inconvenience</option>
+                    <option value="Medium" selected>Medium - General Maintenance</option>
+                    <option value="High">High - Affects Lectures / Studies</option>
+                    <option value="Urgent">Urgent - Safety / Critical Outage</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- 4. Description -->
+              <div class="form-group">
+                <label class="form-label" for="complaintDescription">
+                  Detailed Grievance Description <span class="required">*</span>
+                </label>
+                <textarea class="form-control" id="complaintDescription" rows="5" placeholder="Explain the exact issue, when it started, and how it impacts students..." required></textarea>
+                <div class="invalid-feedback">Please provide at least 15 characters of explanatory context.</div>
+              </div>
+
+              <!-- 5. Attachment Upload Simulator -->
+              <div class="form-group">
+                <label class="form-label">
+                  Supporting Photo / Evidence (Optional)
+                </label>
+                <input type="file" class="form-control" id="complaintAttachment" accept="image/*">
+                <div style="font-size:0.75rem; color:var(--text-light); margin-top:0.25rem;">
+                  Accepts JPG, PNG up to 2 MB. Attach photos of damaged equipment, leakages, or error messages.
+                </div>
+                <div id="attachmentPreviewWrap"></div>
+              </div>
+
+              <!-- Submit Button -->
+              <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:1.5rem; border-top:1px solid var(--border-light); padding-top:1.5rem;">
+                <button type="reset" class="btn btn-outline">
+                  Reset Form
+                </button>
+                <button type="submit" class="btn btn-primary btn-lg">
+                  <i class="fa-solid fa-paper-plane"></i> Submit Complaint
+                </button>
+              </div>
+
+            </form>
+          </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             TAB 3: MY COMPLAINTS (HISTORY & STATUS)
+             ========================================== -->
+        <section class="tab-view-panel" id="tab-my-complaints">
+          
+          <div class="dashboard-header-banner">
+            <div class="page-title-wrap">
+              <h1>My Submitted Complaints</h1>
+              <p>Track, filter, and inspect the resolution history of all your submitted facility reports.</p>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="StudentApp.switchTab('new-complaint')">
+              <i class="fa-solid fa-plus"></i> Submit New
+            </button>
+          </div>
+
+          <div class="table-card">
+            <div class="table-card-header">
+              
+              <!-- Filter tabs -->
+              <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                <button class="btn btn-sm btn-subtle status-filter-pill active" data-status="All">All</button>
+                <button class="btn btn-sm btn-subtle status-filter-pill" data-status="Pending">Pending</button>
+                <button class="btn btn-sm btn-subtle status-filter-pill" data-status="In Progress">In Progress</button>
+                <button class="btn btn-sm btn-subtle status-filter-pill" data-status="Resolved">Resolved</button>
+              </div>
+
+              <!-- Search and Category Filter -->
+              <div class="table-filter-bar">
+                <select class="filter-select" id="categoryFilterSelect">
+                  <option value="All">All Categories</option>
+                  <option value="Classroom">Classroom</option>
+                  <option value="Laboratory">Laboratory</option>
+                  <option value="College Wi-Fi">College Wi-Fi</option>
+                  <option value="Drinking Water">Drinking Water</option>
+                  <option value="Washroom">Washroom</option>
+                  <option value="Library">Library</option>
+                  <option value="Transportation">Transportation</option>
+                  <option value="Other">Other</option>
+                </select>
+
+                <div style="position:relative; width:220px;">
+                  <input type="text" class="form-control" id="myComplaintsSearch" placeholder="Search by ID or title..." style="padding:0.4rem 0.8rem 0.4rem 2rem; font-size:0.85rem;">
+                  <i class="fa-solid fa-magnifying-glass" style="position:absolute; left:0.75rem; top:50%; transform:translateY(-50%); font-size:0.8rem; color:var(--text-light);"></i>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Complaint ID</th>
+                    <th>Title &amp; Location</th>
+                    <th>Category</th>
+                    <th>Priority</th>
+                    <th>Date Lodged</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="myComplaintsTableBody">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             TAB 4: TRACK STATUS (INTERACTIVE STEPPER)
+             ========================================== -->
+        <section class="tab-view-panel" id="tab-track">
+          
+          <div class="dashboard-header-banner">
+            <div class="page-title-wrap">
+              <h1>Track Live Complaint Status</h1>
+              <p>Follow the step-by-step resolution lifecycle and view verified technician notes.</p>
+            </div>
+          </div>
+
+          <!-- Search Bar for Tracking -->
+          <div style="background:#ffffff; border-radius:var(--radius-lg); padding:1.5rem; border:1px solid var(--border-light); margin-bottom:2rem; box-shadow:var(--shadow-sm);">
+            <form id="trackComplaintForm" style="display:flex; gap:0.75rem; max-width:650px;">
+              <input type="text" class="form-control" id="trackComplaintInput" placeholder="Enter Complaint ID (e.g. CMP-2026-1041)" required>
+              <button type="submit" class="btn btn-primary" style="white-space:nowrap;">
+                <i class="fa-solid fa-magnifying-glass"></i> Track Progress
+              </button>
+            </form>
+          </div>
+
+          <!-- Dynamic Result Box -->
+          <div class="tracker-box" id="trackResultContainer">
+            <div style="text-align:center; padding:3rem 1.5rem; color:var(--text-muted);">
+              <i class="fa-solid fa-timeline text-purple" style="font-size:3rem; margin-bottom:1rem; display:block;"></i>
+              <h3 style="color:var(--primary-navy); margin-bottom:0.5rem;">Enter a Complaint ID Above</h3>
+              <p style="font-size:0.92rem;">
+                Or select any complaint from the <a href="javascript:void(0)" onclick="StudentApp.switchTab('my-complaints')" style="color:var(--accent-purple); font-weight:700;">My Complaints</a> list to inspect its live stage.
+              </p>
+            </div>
+          </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             TAB 5: STUDENT PROFILE
+             ========================================== -->
+        <section class="tab-view-panel" id="tab-profile">
+          
+          <div class="dashboard-header-banner">
+            <div class="page-title-wrap">
+              <h1>Student Profile &amp; Campus Verification</h1>
+              <p>Your institutional credentials and academic division records.</p>
+            </div>
+          </div>
+
+          <div style="background:#ffffff; border-radius:var(--radius-lg); border:1px solid var(--border-light); padding:2rem; box-shadow:var(--shadow-sm); max-width:760px;">
+            <form id="studentProfileForm">
+              
+              <div style="display:flex; align-items:center; gap:1.5rem; margin-bottom:2rem; border-bottom:1px solid var(--border-light); padding-bottom:1.5rem;">
+                <div class="user-avatar-circle" style="width:72px; height:72px; font-size:1.75rem;">AC</div>
+                <div>
+                  <h3 style="font-size:1.35rem; font-weight:800; color:var(--primary-navy); margin-bottom:0.25rem;">Alex Chen</h3>
+                  <div style="font-size:0.85rem; color:var(--text-muted); display:flex; gap:0.75rem;">
+                    <span><i class="fa-solid fa-id-card"></i> Roll: CS-2023-042</span>
+                    <span>•</span>
+                    <span class="badge" style="background:#dbeafe; color:#1e40af;">Enrolled Full-Time</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
+                <div class="form-group">
+                  <label class="form-label">Full Name</label>
+                  <input type="text" class="form-control" id="profName" readonly style="background:#f8fafc;">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Student Roll Number</label>
+                  <input type="text" class="form-control" id="profRoll" readonly style="background:#f8fafc;">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">College Email Address</label>
+                  <input type="email" class="form-control" id="profEmail" readonly style="background:#f8fafc;">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Academic Department</label>
+                  <input type="text" class="form-control" id="profDept" readonly style="background:#f8fafc;">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Program &amp; Year</label>
+                  <input type="text" class="form-control" id="profYear" readonly style="background:#f8fafc;">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Contact Phone Number</label>
+                  <input type="text" class="form-control" id="profPhone" placeholder="+91 98765 43210">
+                </div>
+
+                <div class="form-group" style="grid-column:1 / -1;">
+                  <label class="form-label">Hostel Residence / Address</label>
+                  <input type="text" class="form-control" id="profHostel" placeholder="e.g. Block B, Room 214 or Day Scholar (City)">
+                </div>
+              </div>
+
+              <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:1.5rem; border-top:1px solid var(--border-light); padding-top:1.5rem;">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fa-solid fa-floppy-disk"></i> Save Contact Updates
+                </button>
+              </div>
+
+            </form>
+          </div>
+
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+
+  <!-- ==========================================
+       MODAL: SUBMISSION SUCCESS
+       ========================================== -->
+  <div class="modal-backdrop" id="submissionSuccessModal">
+    <div class="modal-card">
+      <div class="modal-body" style="text-align:center; padding:2.5rem 2rem;">
+        <div style="width:68px; height:68px; border-radius:var(--radius-full); background:#ecfdf5; color:#059669; font-size:2rem; display:flex; align-items:center; justify-content:center; margin:0 auto 1.25rem auto;">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <h2 style="font-size:1.5rem; font-weight:800; color:var(--primary-navy); margin-bottom:0.5rem;">Grievance Lodged Successfully!</h2>
+        <p style="color:var(--text-muted); font-size:0.92rem; margin-bottom:1.5rem;">
+          Your complaint has been queued in the campus triage registry and assigned a permanent identification number.
+        </p>
+
+        <div style="background:#f8fafc; border-radius:var(--radius-md); padding:1rem; border:1px dashed var(--accent-purple); margin-bottom:1.5rem;">
+          <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); font-weight:700;">Unique Tracking ID</div>
+          <div style="font-size:1.5rem; font-weight:800; font-family:monospace; color:var(--accent-purple);" id="newGeneratedIdText">CMP-2026-XXXX</div>
+          <div style="font-size:0.85rem; color:var(--primary-navy); margin-top:0.35rem; font-weight:600;" id="newGeneratedTitleText">Title summary</div>
+          <div style="font-size:0.78rem; color:var(--text-muted);" id="newGeneratedCategoryText">Category</div>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:0.75rem;">
+          <button class="btn btn-outline" id="closeSuccessModalBtn">Return to Dashboard</button>
+          <button class="btn btn-primary" id="trackSubmittedComplaintBtn">
+            <i class="fa-solid fa-timeline"></i> Track Status Now
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+       MODAL: COMPLAINT DETAIL & TIMELINE
+       ========================================== -->
+  <div class="modal-backdrop" id="complaintDetailModal">
+    <div class="modal-card modal-card-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-title-icon">
+            <i class="fa-solid fa-file-lines"></i>
+          </div>
+          <div>
+            <div class="modal-title" id="modalDetailTitle">Complaint Details</div>
+            <div style="font-size:0.78rem; color:var(--text-muted); font-family:monospace;" id="modalDetailId">CMP-2026-XXXX</div>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="closeDetailModalBtn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- Meta Details Strip -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:1rem; background:#f8fafc; border-radius:var(--radius-md); padding:1rem; border:1px solid #e2e8f0; margin-bottom:1.5rem;">
+          <div>
+            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Category</div>
+            <div id="modalDetailCategory" style="font-weight:700; color:var(--primary-navy);">Classroom</div>
+          </div>
+          <div>
+            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Current Status</div>
+            <div id="modalDetailStatus">Pending</div>
+          </div>
+          <div>
+            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Priority</div>
+            <div id="modalDetailPriority">Medium</div>
+          </div>
+          <div>
+            <div style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Date Submitted</div>
+            <div id="modalDetailDate" style="font-size:0.85rem; font-weight:600;">2026-11-20</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:1.5rem;">
+          <h4 style="font-size:0.88rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--navy-muted); margin-bottom:0.35rem;">Location Coordinates</h4>
+          <p id="modalDetailLocation" style="color:var(--primary-navy); font-size:0.92rem;"></p>
+        </div>
+
+        <div style="margin-bottom:1.5rem;">
+          <h4 style="font-size:0.88rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--navy-muted); margin-bottom:0.35rem;">Student Description</h4>
+          <p id="modalDetailDesc" style="color:var(--text-main); font-size:0.92rem; line-height:1.6; background:#ffffff; border:1px solid #e2e8f0; border-radius:8px; padding:1rem;"></p>
+        </div>
+
+        <div id="modalDetailAttachmentWrap"></div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-top:1.5rem;">
+          <div style="background:#f1f5f9; border-radius:var(--radius-md); padding:1rem;">
+            <h5 style="font-size:0.82rem; font-weight:700; color:var(--navy-muted); text-transform:uppercase; margin-bottom:0.3rem;">Assigned Personnel / Division</h5>
+            <div id="modalDetailAssigned" style="font-weight:700; color:var(--primary-navy); font-size:0.9rem;">Unassigned</div>
+          </div>
+
+          <div style="background:#f1f5f9; border-radius:var(--radius-md); padding:1rem;">
+            <h5 style="font-size:0.82rem; font-weight:700; color:var(--navy-muted); text-transform:uppercase; margin-bottom:0.3rem;">Administrative Remarks</h5>
+            <div id="modalDetailRemarks" style="color:var(--navy-dark); font-size:0.88rem;">No notes yet.</div>
+          </div>
+        </div>
+
+        <!-- History Timeline -->
+        <div style="margin-top:2rem;">
+          <h4 style="font-size:0.95rem; font-weight:700; color:var(--primary-navy); margin-bottom:0.75rem;">
+            <i class="fa-solid fa-clock-rotate-left text-purple" style="margin-right:6px;"></i> Audit Timeline
+          </h4>
+          <div class="history-timeline" id="modalDetailTimeline">
+            <!-- Injected dynamically -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+/**
+ * COLLEGE COMPLAINT MANAGEMENT SYSTEM (CCMS)
+ * Data Storage & State Management Layer (LocalStorage)
+ */
+
+const STORAGE_KEYS = {
+  COMPLAINTS: 'ccms_complaints',
+  USERS: 'ccms_users',
+  SESSION: 'ccms_session',
+  NOTIFICATIONS: 'ccms_notifications',
+  ACTIVITY: 'ccms_activity'
+};
+
+// Default seed data for initial demonstration
+const SEED_USERS = [
+  {
+    id: 'USR-STU-001',
+    name: 'Alex Chen',
+    email: 'alex.chen@campus.edu',
+    password: 'password123',
+    role: 'student',
+    rollNumber: 'CS-2023-042',
+    department: 'Computer Science & Engineering',
+    year: '3rd Year (B.Tech)',
+    phone: '+91 98765 43210',
+    hostel: 'Hostel Block B, Room 214',
+    joinedDate: '2023-08-15'
+  },
+  {
+    id: 'USR-STU-002',
+    name: 'Priya Sharma',
+    email: 'priya.sharma@campus.edu',
+    password: 'password123',
+    role: 'student',
+    rollNumber: 'EC-2024-018',
+    department: 'Electronics & Communication',
+    year: '2nd Year (B.Tech)',
+    phone: '+91 98451 23456',
+    hostel: 'Girls Hostel 1, Room 108',
+    joinedDate: '2024-08-10'
+  },
+  {
+    id: 'USR-ADM-001',
+    name: 'Dr. Robert Vance',
+    email: 'admin@campus.edu',
+    password: 'AdminSecure#2026',
+    role: 'admin',
+    employeeId: 'EMP-ADM-101',
+    designation: 'Dean of Student Welfare & Campus Operations',
+    department: 'Administration',
+    phone: '+91 91234 56789',
+    office: 'Administrative Block, Chamber 104',
+    joinedDate: '2019-06-01'
+  }
+];
+
+const SEED_COMPLAINTS = [
+  {
+    id: 'CMP-2026-1041',
+    studentId: 'USR-STU-001',
+    studentName: 'Alex Chen',
+    studentRoll: 'CS-2023-042',
+    studentEmail: 'alex.chen@campus.edu',
+    studentDept: 'Computer Science & Engineering',
+    studentPhone: '+91 98765 43210',
+    category: 'College Wi-Fi',
+    title: 'High packet loss and intermittent dropouts in Central Library 2nd Floor',
+    location: 'Central Library, 2nd Floor Reading Hall (Near AP-LIB-04)',
+    priority: 'High',
+    description: 'During peak research study hours (2 PM to 5 PM), the campus Wi-Fi SSID "Campus-Secure-5G" repeatedly disconnects every 3 to 5 minutes. Ping tests to the gateway show over 40% packet loss. This is severely hindering online journal access for our seminar submissions.',
+    status: 'In Progress',
+    submissionDate: '2026-11-20 14:30',
+    lastUpdated: '2026-11-21 11:15',
+    assignedTo: 'Network Operations Center (NOC) - Engr. Suresh',
+    adminRemarks: 'Investigation confirmed faulty PoE adapter on Access Point AP-LIB-04. Replacement hardware requested from inventory. Expected completion by tomorrow noon.',
+    attachmentUrl: null,
+    history: [
+      { status: 'Pending', date: '2026-11-20 14:30', note: 'Grievance submitted by student.' },
+      { status: 'In Progress', date: '2026-11-21 11:15', note: 'Assigned to NOC Team. Faulty PoE adapter identified and spare replacement queued.' }
+    ]
+  },
+  {
+    id: 'CMP-2026-1038',
+    studentId: 'USR-STU-001',
+    studentName: 'Alex Chen',
+    studentRoll: 'CS-2023-042',
+    studentEmail: 'alex.chen@campus.edu',
+    studentDept: 'Computer Science & Engineering',
+    studentPhone: '+91 98765 43210',
+    category: 'Drinking Water',
+    title: 'Water cooler dispensing warm water and filter indicator blinking red',
+    location: 'C-Block (Tech Block), Ground Floor near Staircase B',
+    priority: 'Medium',
+    description: 'The RO water dispenser filter maintenance indicator is flashing red, and the cooling unit is not operating. More than 150 students use this water station between lectures.',
+    status: 'Resolved',
+    submissionDate: '2026-11-18 10:15',
+    lastUpdated: '2026-11-19 16:45',
+    assignedTo: 'Sanitation & Estate Maintenance - Mr. Raman',
+    adminRemarks: 'RO filter cartridges replaced with certified fresh sediment and carbon filters. Cooling compressor thermostat replaced and water quality TDS certified at 110 ppm.',
+    attachmentUrl: null,
+    history: [
+      { status: 'Pending', date: '2026-11-18 10:15', note: 'Grievance submitted by student.' },
+      { status: 'In Progress', date: '2026-11-18 14:00', note: 'Technician dispatched to inspect compressor and membrane.' },
+      { status: 'Resolved', date: '2026-11-19 16:45', note: 'Filter cartridges replaced and chiller unit fully functional. TDS verified.' }
+    ]
+  },
+  {
+    id: 'CMP-2026-1049',
+    studentId: 'USR-STU-001',
+    studentName: 'Alex Chen',
+    studentRoll: 'CS-2023-042',
+    studentEmail: 'alex.chen@campus.edu',
+    studentDept: 'Computer Science & Engineering',
+    studentPhone: '+91 98765 43210',
+    category: 'Classroom',
+    title: 'Ceiling projector HDMI port damaged and flickers in Lecture Hall 204',
+    location: 'Main Academic Block, Lecture Hall LH-204',
+    priority: 'Urgent',
+    description: 'The ceiling-mounted Epson projector in LH-204 has a bent pin in the wall HDMI port. Screen turns magenta and flickers during professors lectures. Major final project presentations are scheduled here on Thursday.',
+    status: 'Pending',
+    submissionDate: '2026-11-22 09:10',
+    lastUpdated: '2026-11-22 09:10',
+    assignedTo: 'Audio-Visual Media Department',
+    adminRemarks: 'Pending technician schedule. Audiovisual unit dispatched for on-site inspection.',
+    attachmentUrl: null,
+    history: [
+      { status: 'Pending', date: '2026-11-22 09:10', note: 'Grievance submitted by student.' }
+    ]
+  },
+  {
+    id: 'CMP-2026-1025',
+    studentId: 'USR-STU-002',
+    studentName: 'Priya Sharma',
+    studentRoll: 'EC-2024-018',
+    studentEmail: 'priya.sharma@campus.edu',
+    studentDept: 'Electronics & Communication',
+    studentPhone: '+91 98451 23456',
+    category: 'Laboratory',
+    title: 'Digital Storage Oscilloscope Bench 4 showing calibration error',
+    location: 'Electronics Block, Advanced Circuit Lab EC-102',
+    priority: 'Medium',
+    description: 'The Rigol DSO at Workbench #4 exhibits a voltage drift offset of +1.8V on Channel 1 and fails self-calibration test. Needs servicing before the upcoming practical exam.',
+    status: 'Resolved',
+    submissionDate: '2026-11-15 11:20',
+    lastUpdated: '2026-11-17 14:00',
+    assignedTo: 'Lab Superintendent - Mr. Deshmukh',
+    adminRemarks: 'Device sent to authorized manufacturer calibration center. Recalibrated, firmware upgraded, and returned to bench with certification tag.',
+    attachmentUrl: null,
+    history: [
+      { status: 'Pending', date: '2026-11-15 11:20', note: 'Grievance submitted by student.' },
+      { status: 'In Progress', date: '2026-11-16 09:30', note: 'Bench inspected by lab superintendent; dispatched for calibration.' },
+      { status: 'Resolved', date: '2026-11-17 14:00', note: 'Oscilloscope restored to bench with zero-drift accuracy test passed.' }
+    ]
+  },
+  {
+    id: 'CMP-2026-1052',
+    studentId: 'USR-STU-002',
+    studentName: 'Priya Sharma',
+    studentRoll: 'EC-2024-018',
+    studentEmail: 'priya.sharma@campus.edu',
+    studentDept: 'Electronics & Communication',
+    studentPhone: '+91 98451 23456',
+    category: 'Washroom',
+    title: 'Water tap faucet broken and leaking continuously in Girls Washroom 1st Floor',
+    location: 'ECE & Mechanical Annex, 1st Floor East Wing',
+    priority: 'High',
+    description: 'Second washbasin tap handle has sheared off, resulting in continuous high-pressure water loss and flooding on the floor tiles creating slipping hazard.',
+    status: 'In Progress',
+    submissionDate: '2026-11-22 13:45',
+    lastUpdated: '2026-11-22 15:30',
+    assignedTo: 'Plumbing & Sanitation Division - Team Lead Vinod',
+    adminRemarks: 'Main isolating valve shut off to arrest flooding. New quarter-turn brass tap scheduled for installation.',
+    attachmentUrl: null,
+    history: [
+      { status: 'Pending', date: '2026-11-22 13:45', note: 'Grievance submitted by student.' },
+      { status: 'In Progress', date: '2026-11-22 15:30', note: 'Plumber isolated water line and ordered replacement faucet.' }
+    ]
+  },
+  {
+    id: 'CMP-2026-1019',
+    studentId: 'USR-STU-001',
+    studentName: 'Alex Chen',
+    studentRoll: 'CS-2023-042',
+    studentEmail: 'alex.chen@campus.edu',
+    studentDept: 'Computer Science & Engineering',
+    studentPhone: '+91 98765 43210',
+    category: 'Transportation',
+    title: 'Morning Route-5 Campus Shuttle arriving 35 minutes late consecutively',
+    location: 'City North Bus Route 5 (Metro Station pickup)',
+    priority: 'Medium',
+    description: 'The 07:45 AM campus shuttle consistently arrives after 08:20 AM due to unscheduled detour, causing day-scholar students to miss attendance in their 8:30 AM first period lectures.',
+    status: 'Resolved',
+    submissionDate: '2026-11-12 09:00',
+    lastUpdated: '2026-11-14 17:00',
+    assignedTo: 'Transport Department - Manager Mr. Kulkarni',
+    adminRemarks: 'Transport manager met with the contractor. Bus departure from Depot rescheduled 20 minutes earlier (07:25 AM) to navigate morning ring-road traffic. Driver given strict itinerary.',
+    attachmentUrl: null,
+    history: [
+      { status: 'Pending', date: '2026-11-12 09:00', note: 'Grievance submitted by student.' },
+      { status: 'In Progress', date: '2026-11-13 10:00', note: 'Transport coordinator reviewing GPS logs of Bus #5.' },
+      { status: 'Resolved', date: '2026-11-14 17:00', note: 'Revised schedule implemented. On-time arrival verified for 3 consecutive days.' }
+    ]
+  },
+  {
+    id: 'CMP-2026-1060',
+    studentId: 'USR-STU-002',
+    studentName: 'Priya Sharma',
+    studentRoll: 'EC-2024-018',
+    studentEmail: 'priya.sharma@campus.edu',
+    studentDept: 'Electronics & Communication',
+    studentPhone: '+91 98451 23456',
+    category: 'Library',
+    title: 'Shortage of prescribed textbooks for Digital Signal Processing (DSP)',
+    location: 'Central Library, Reference & Lending Section 3',
+    priority: 'Low',
+    description: 'Only 3 copies of "Digital Signal Processing by Proakis & Manolakis" are available in the reference section for a batch of 120 students. Requesting purchase of 10 additional copies.',
+    status: 'Pending',
+    submissionDate: '2026-11-23 08:30',
+    lastUpdated: '2026-11-23 08:30',
+    assignedTo: 'Chief Librarian & Book Procurement Board',
+    adminRemarks: 'Under review for Q4 library book acquisition cycle.',
+    attachmentUrl: null,
+    history: [
+      { status: 'Pending', date: '2026-11-23 08:30', note: 'Grievance submitted by student.' }
+    ]
+  },
+  {
+    id: 'CMP-2026-1033',
+    studentId: 'USR-STU-001',
+    studentName: 'Alex Chen',
+    studentRoll: 'CS-2023-042',
+    studentEmail: 'alex.chen@campus.edu',
+    studentDept: 'Computer Science & Engineering',
+    studentPhone: '+91 98765 43210',
+    category: 'Other',
+    title: 'Streetlights between Girls Hostel and Main Cafeteria flickering and dark',
+    location: 'North Walkway Boulevard between Cafeteria and Hostel B',
+    priority: 'High',
+    description: 'Three consecutive solar LED pathway poles have short-circuited and remain dark at night, making the walkway unsafe for evening return from library.',
+    status: 'Resolved',
+    submissionDate: '2026-11-16 19:10',
+    lastUpdated: '2026-11-18 12:00',
+    assignedTo: 'Electrical Works Division',
+    adminRemarks: 'Underground wiring short circuit rectified. Replaced 3 LED luminaires with 60W IP65 waterproof fittings. All lamps operational.',
+    attachmentUrl: null,
+    history: [
+      { status: 'Pending', date: '2026-11-16 19:10', note: 'Grievance submitted by student.' },
+      { status: 'In Progress', date: '2026-11-17 10:15', note: 'Electrical contractor deployed cable fault locator.' },
+      { status: 'Resolved', date: '2026-11-18 12:00', note: 'Repaired cable joints and replaced light fittings. Pathway inspected at night.' }
+    ]
+  }
+];
+
+const SEED_NOTIFICATIONS = [
+  {
+    id: 'NOTIF-001',
+    userId: 'USR-STU-001',
+    complaintId: 'CMP-2026-1041',
+    title: 'Status Updated to In Progress',
+    message: 'Your Wi-Fi grievance (CMP-2026-1041) was picked up by Network Operations Center. Hardware replacement underway.',
+    date: '2026-11-21 11:15',
+    read: false
+  },
+  {
+    id: 'NOTIF-002',
+    userId: 'USR-STU-001',
+    complaintId: 'CMP-2026-1038',
+    title: 'Complaint Resolved',
+    message: 'Drinking water grievance (CMP-2026-1038) has been resolved. New filters installed and water tested.',
+    date: '2026-11-19 16:45',
+    read: true
+  },
+  {
+    id: 'NOTIF-003',
+    userId: 'USR-STU-002',
+    complaintId: 'CMP-2026-1052',
+    title: 'Status Updated to In Progress',
+    message: 'Washroom tap leakage grievance (CMP-2026-1052) assigned to Plumbing division. Valve isolated.',
+    date: '2026-11-22 15:30',
+    read: false
+  }
+];
+
+const SEED_ACTIVITY = [
+  {
+    id: 'ACT-001',
+    timestamp: '2026-11-23 08:30',
+    user: 'Priya Sharma (Student)',
+    action: 'Lodged new complaint',
+    details: 'CMP-2026-1060 [Library] Shortage of prescribed textbooks for DSP'
+  },
+  {
+    id: 'ACT-002',
+    timestamp: '2026-11-22 15:30',
+    user: 'Dr. Robert Vance (Admin)',
+    action: 'Updated status to In Progress',
+    details: 'CMP-2026-1052 [Washroom] Assigned to Plumbing & Sanitation'
+  },
+  {
+    id: 'ACT-003',
+    timestamp: '2026-11-22 09:10',
+    user: 'Alex Chen (Student)',
+    action: 'Lodged new complaint',
+    details: 'CMP-2026-1049 [Classroom] Ceiling projector HDMI port damaged'
+  },
+  {
+    id: 'ACT-004',
+    timestamp: '2026-11-21 11:15',
+    user: 'Dr. Robert Vance (Admin)',
+    action: 'Updated status to In Progress',
+    details: 'CMP-2026-1041 [College Wi-Fi] Dispatched NOC Engineer'
+  },
+  {
+    id: 'ACT-005',
+    timestamp: '2026-11-19 16:45',
+    user: 'Dr. Robert Vance (Admin)',
+    action: 'Marked complaint as Resolved',
+    details: 'CMP-2026-1038 [Drinking Water] Filter cartridges replaced'
+  }
+];
+
+/**
+ * Storage Helper Class
+ */
+class CCMSStorage {
+  constructor() {
+    this.init();
+  }
+
+  init() {
+    let storedUsers = localStorage.getItem(STORAGE_KEYS.USERS);
+    if (!storedUsers) {
+      localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(SEED_USERS));
+    } else {
+      try {
+        let users = JSON.parse(storedUsers);
+        let adm = users.find(u => u.role === 'admin');
+        if (adm && adm.password === 'admin123') {
+          adm.password = 'AdminSecure#2026';
+          localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users));
+        }
+      } catch (e) {}
+    }
+    if (!localStorage.getItem(STORAGE_KEYS.COMPLAINTS)) {
+      localStorage.setItem(STORAGE_KEYS.COMPLAINTS, JSON.stringify(SEED_COMPLAINTS));
+    }
+    if (!localStorage.getItem(STORAGE_KEYS.NOTIFICATIONS)) {
+      localStorage.setItem(STORAGE_KEYS.NOTIFICATIONS, JSON.stringify(SEED_NOTIFICATIONS));
+    }
+    if (!localStorage.getItem(STORAGE_KEYS.ACTIVITY)) {
+      localStorage.setItem(STORAGE_KEYS.ACTIVITY, JSON.stringify(SEED_ACTIVITY));
+    }
+  }
+
+  // Reset to default seed data
+  resetToDemo() {
+    localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(SEED_USERS));
+    localStorage.setItem(STORAGE_KEYS.COMPLAINTS, JSON.stringify(SEED_COMPLAINTS));
+    localStorage.setItem(STORAGE_KEYS.NOTIFICATIONS, JSON.stringify(SEED_NOTIFICATIONS));
+    localStorage.setItem(STORAGE_KEYS.ACTIVITY, JSON.stringify(SEED_ACTIVITY));
+  }
+
+  // --- Complaints Methods ---
+
+  getComplaints() {
+    try {
+      const data = localStorage.getItem(STORAGE_KEYS.COMPLAINTS);
+      return data ? JSON.parse(data) : [];
+    } catch (e) {
+      console.error('Failed reading complaints', e);
+      return [];
+    }
+  }
+
+  getComplaintById(id) {
+    if (!id) return null;
+    const complaints = this.getComplaints();
+    return complaints.find(c => c.id.toUpperCase().trim() === id.toUpperCase().trim()) || null;
+  }
+
+  saveComplaint(data) {
+    const complaints = this.getComplaints();
+    const now = new Date();
+    const formattedDate = this.formatDate(now);
+
+    const newId = this.generateComplaintId();
+    const newComplaint = {
+      id: newId,
+      studentId: data.studentId || 'USR-STU-001',
+      studentName: data.studentName || 'Alex Chen',
+      studentRoll: data.studentRoll || 'CS-2023-042',
+      studentEmail: data.studentEmail || 'alex.chen@campus.edu',
+      studentDept: data.studentDept || 'Computer Science & Engineering',
+      studentPhone: data.studentPhone || '+91 98765 43210',
+      category: data.category || 'Other',
+      title: data.title.trim(),
+      location: data.location ? data.location.trim() : 'Campus Premises',
+      priority: data.priority || 'Medium',
+      description: data.description.trim(),
+      status: 'Pending',
+      submissionDate: formattedDate,
+      lastUpdated: formattedDate,
+      assignedTo: 'Awaiting Department Review',
+      adminRemarks: 'Complaint received and queued for administrative triage.',
+      attachmentUrl: data.attachmentUrl || null,
+      history: [
+        { status: 'Pending', date: formattedDate, note: 'Grievance submitted by student.' }
+      ]
+    };
+
+    complaints.unshift(newComplaint);
+    localStorage.setItem(STORAGE_KEYS.COMPLAINTS, JSON.stringify(complaints));
+
+    // Log Activity
+    this.logActivity(
+      'Lodged new complaint',
+      `${newComplaint.studentName} (Student)`,
+      `${newComplaint.id} [${newComplaint.category}] ${newComplaint.title.substring(0, 45)}...`
+    );
+
+    return newComplaint;
+  }
+
+  updateComplaintStatus(id, newStatus, remarks = '', assignedTo = '') {
+    const complaints = this.getComplaints();
+    const index = complaints.findIndex(c => c.id === id);
+    if (index === -1) return null;
+
+    const formattedDate = this.formatDate(new Date());
+    const complaint = complaints[index];
+    const oldStatus = complaint.status;
+
+    complaint.status = newStatus;
+    complaint.lastUpdated = formattedDate;
+    if (remarks) complaint.adminRemarks = remarks;
+    if (assignedTo) complaint.assignedTo = assignedTo;
+
+    if (!complaint.history) complaint.history = [];
+    complaint.history.push({
+      status: newStatus,
+      date: formattedDate,
+      note: remarks || `Status transitioned from ${oldStatus} to ${newStatus}`
+    });
+
+    complaints[index] = complaint;
+    localStorage.setItem(STORAGE_KEYS.COMPLAINTS, JSON.stringify(complaints));
+
+    // Notify the student
+    this.addNotification(
+      complaint.studentId,
+      `Complaint ${newStatus}: ${complaint.id}`,
+      `Your grievance "${complaint.title.substring(0, 35)}..." has been marked as ${newStatus}. ${remarks ? 'Remarks: ' + remarks : ''}`,
+      complaint.id
+    );
+
+    // Log admin activity
+    const currentUser = this.getCurrentUser();
+    this.logActivity(
+      `Updated status to ${newStatus}`,
+      currentUser ? `${currentUser.name} (Admin)` : 'Campus Admin',
+      `${complaint.id} [${complaint.category}] Remarks: ${remarks || 'None'}`
+    );
+
+    return complaint;
+  }
+
+  deleteComplaint(id, reason = 'Duplicate or Inappropriate') {
+    const complaints = this.getComplaints();
+    const complaint = complaints.find(c => c.id === id);
+    if (!complaint) return false;
+
+    const filtered = complaints.filter(c => c.id !== id);
+    localStorage.setItem(STORAGE_KEYS.COMPLAINTS, JSON.stringify(filtered));
+
+    const currentUser = this.getCurrentUser();
+    this.logActivity(
+      'Deleted complaint',
+      currentUser ? `${currentUser.name} (Admin)` : 'Campus Admin',
+      `Deleted ${id} [${complaint.category}] - Reason: ${reason}`
+    );
+
+    return true;
+  }
+
+  generateComplaintId() {
+    const year = new Date().getFullYear();
+    const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+    const potentialId = `CMP-${year}-${randomSuffix}`;
+    // Check collision
+    if (this.getComplaintById(potentialId)) {
+      return this.generateComplaintId();
+    }
+    return potentialId;
+  }
+
+  // --- Users & Auth Methods ---
+
+  getUsers() {
+    try {
+      const data = localStorage.getItem(STORAGE_KEYS.USERS);
+      return data ? JSON.parse(data) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  getUserByEmail(email) {
+    if (!email) return null;
+    const users = this.getUsers();
+    return users.find(u => u.email.toLowerCase().trim() === email.toLowerCase().trim()) || null;
+  }
+
+  registerUser(userData) {
+    const users = this.getUsers();
+    if (this.getUserByEmail(userData.email)) {
+      throw new Error('A user with this institutional email already exists.');
+    }
+
+    const newUser = {
+      id: `USR-STU-${Math.floor(100 + Math.random() * 900)}`,
+      name: userData.name.trim(),
+      email: userData.email.toLowerCase().trim(),
+      password: userData.password,
+      role: 'student',
+      rollNumber: userData.rollNumber ? userData.rollNumber.trim() : 'CS-2025-000',
+      department: userData.department || 'General Engineering',
+      year: userData.year || '1st Year',
+      phone: userData.phone ? userData.phone.trim() : '',
+      hostel: userData.hostel ? userData.hostel.trim() : 'Day Scholar',
+      joinedDate: this.formatDate(new Date()).split(' ')[0]
+    };
+
+    users.push(newUser);
+    localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users));
+    return newUser;
+  }
+
+  authenticate(email, password, expectedRole = null, securityPin = null) {
+    const user = this.getUserByEmail(email);
+    if (!user) {
+      throw new Error('No registered account found with this email address.');
+    }
+    if (user.password !== password) {
+      throw new Error('Incorrect password entered. Please check your credentials.');
+    }
+    if (expectedRole && user.role !== expectedRole) {
+      throw new Error(`Unauthorized portal access. This account is registered as a ${user.role}, not ${expectedRole}.`);
+    }
+    if (user.role === 'admin') {
+      const requiredKey = 'CCMS@Admin2026';
+      if (!securityPin || securityPin.trim() !== requiredKey) {
+        throw new Error('Access Denied: Invalid Administrative Security Key. Unauthorized access attempt recorded.');
+      }
+    }
+
+    // Save active session
+    this.setCurrentUser(user);
+    return user;
+  }
+
+  getCurrentUser() {
+    try {
+      const data = localStorage.getItem(STORAGE_KEYS.SESSION);
+      return data ? JSON.parse(data) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  setCurrentUser(user) {
+    if (!user) {
+      localStorage.removeItem(STORAGE_KEYS.SESSION);
+    } else {
+      localStorage.setItem(STORAGE_KEYS.SESSION, JSON.stringify(user));
+    }
+  }
+
+  logout() {
+    localStorage.removeItem(STORAGE_KEYS.SESSION);
+  }
+
+  updateProfile(userId, updatedFields) {
+    const users = this.getUsers();
+    const idx = users.findIndex(u => u.id === userId);
+    if (idx === -1) return null;
+
+    users[idx] = { ...users[idx], ...updatedFields };
+    localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users));
+
+    const current = this.getCurrentUser();
+    if (current && current.id === userId) {
+      this.setCurrentUser(users[idx]);
+    }
+    return users[idx];
+  }
+
+  // --- Notifications Methods ---
+
+  getNotifications(userId = null) {
+    try {
+      const data = localStorage.getItem(STORAGE_KEYS.NOTIFICATIONS);
+      const all = data ? JSON.parse(data) : [];
+      if (!userId) return all;
+      return all.filter(n => n.userId === userId);
+    } catch (e) {
+      return [];
+    }
+  }
+
+  addNotification(userId, title, message, complaintId = null) {
+    const notifs = this.getNotifications();
+    const newNotif = {
+      id: `NOTIF-${Date.now()}`,
+      userId,
+      complaintId,
+      title,
+      message,
+      date: this.formatDate(new Date()),
+      read: false
+    };
+    notifs.unshift(newNotif);
+    localStorage.setItem(STORAGE_KEYS.NOTIFICATIONS, JSON.stringify(notifs));
+    return newNotif;
+  }
+
+  markAllNotificationsRead(userId) {
+    const notifs = this.getNotifications();
+    notifs.forEach(n => {
+      if (n.userId === userId) n.read = true;
+    });
+    localStorage.setItem(STORAGE_KEYS.NOTIFICATIONS, JSON.stringify(notifs));
+  }
+
+  // --- Activity Log Methods ---
+
+  getActivityLogs() {
+    try {
+      const data = localStorage.getItem(STORAGE_KEYS.ACTIVITY);
+      return data ? JSON.parse(data) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  logActivity(action, user, details) {
+    const logs = this.getActivityLogs();
+    const newEntry = {
+      id: `ACT-${Date.now()}`,
+      timestamp: this.formatDate(new Date()),
+      user,
+      action,
+      details
+    };
+    logs.unshift(newEntry);
+    if (logs.length > 50) logs.pop(); // keep recent 50
+    localStorage.setItem(STORAGE_KEYS.ACTIVITY, JSON.stringify(logs));
+  }
+
+  // --- Utilities ---
+
+  formatDate(dateObj) {
+    const d = new Date(dateObj);
+    const pad = num => String(num).padStart(2, '0');
+    const yyyy = d.getFullYear();
+    const mm = pad(d.getMonth() + 1);
+    const dd = pad(d.getDate());
+    const hh = pad(d.getHours());
+    const min = pad(d.getMinutes());
+    return `${yyyy}-${mm}-${dd} ${hh}:${min}`;
+  }
+  // --- C++ Backend REST Integration ---
+
+  async checkBackendConnection() {
+    const candidateUrls = [
+      (window.location.protocol.startsWith('http') ? window.location.origin + '/api' : 'http://localhost:8080/api')
+    ];
+
+    for (const url of candidateUrls) {
+      try {
+        const res = await fetch(url + '/stats', { method: 'GET', mode: 'cors' });
+        if (res.ok) {
+          this.backendUrl = url;
+          this.isBackendOnline = true;
+          this.syncFromBackend();
+          this.displayBackendStatusIndicator(true);
+          return true;
+        }
+      } catch (e) {
+        // Backend not online
+      }
+    }
+    this.isBackendOnline = false;
+    this.displayBackendStatusIndicator(false);
+    return false;
+  }
+
+  async syncFromBackend() {
+    if (!this.backendUrl) return;
+    try {
+      const res = await fetch(this.backendUrl + '/complaints');
+      if (res.ok) {
+        const complaints = await res.json();
+        localStorage.setItem(STORAGE_KEYS.COMPLAINTS, JSON.stringify(complaints));
+      }
+    } catch (e) {
+      console.warn('C++ Backend sync note:', e);
+    }
+  }
+
+  displayBackendStatusIndicator(isOnline) {
+    let indicator = document.getElementById('backendStatusIndicator');
+    if (!indicator) {
+      indicator = document.createElement('div');
+      indicator.id = 'backendStatusIndicator';
+      indicator.style.position = 'fixed';
+      indicator.style.bottom = '16px';
+      indicator.style.left = '16px';
+      indicator.style.zIndex = '9000';
+      indicator.style.fontSize = '0.75rem';
+      indicator.style.fontWeight = '700';
+      indicator.style.padding = '0.35rem 0.75rem';
+      indicator.style.borderRadius = '9999px';
+      indicator.style.boxShadow = '0 2px 8px rgba(0,0,0,0.12)';
+      indicator.style.display = 'flex';
+      indicator.style.alignItems = 'center';
+      indicator.style.gap = '0.4rem';
+      indicator.style.transition = 'all 0.3s ease';
+      document.body.appendChild(indicator);
+    }
+
+    if (isOnline) {
+      indicator.style.background = '#ecfdf5';
+      indicator.style.color = '#065f46';
+      indicator.style.border = '1px solid #a7f3d0';
+      indicator.innerHTML = '<i class="fa-solid fa-server"></i> C++ Backend Connected (Port 8080)';
+    } else {
+      indicator.style.background = '#f8fafc';
+      indicator.style.color = '#64748b';
+      indicator.style.border = '1px solid #e2e8f0';
+      indicator.innerHTML = '<i class="fa-solid fa-hard-drive"></i> Client Storage Mode (Ready)';
+    }
+  }
+}
+
+// Global instance
+window.CCMS = window.CCMS || {};
+window.CCMS.storage = new CCMSStorage();
+// Probe backend
+setTimeout(() => {
+  window.CCMS.storage.checkBackendConnection();
+}, 100);
+
+/**
+ * COLLEGE COMPLAINT MANAGEMENT SYSTEM (CCMS)
+ * Authentication & Session Management Module
+ */
+
+window.CCMS = window.CCMS || {};
+
+const AuthManager = {
+  // Check if current user is logged in with required role
+  requireAuth(requiredRole = null) {
+    const user = window.CCMS.storage.getCurrentUser();
+    if (!user) {
+      this.redirectToLogin();
+      return null;
+    }
+
+    if (requiredRole && user.role !== requiredRole) {
+      if (user.role === 'admin') {
+        window.location.href = 'admin-dashboard.html';
+      } else {
+        window.location.href = 'student-dashboard.html';
+      }
+      return null;
+    }
+
+    return user;
+  },
+
+  redirectToLogin() {
+    // If not on index.html, redirect back to index.html with login prompt
+    if (!window.location.pathname.endsWith('index.html') && !window.location.pathname.endsWith('/')) {
+      window.location.href = 'index.html?showAuth=true';
+    }
+  },
+
+  login(email, password, expectedRole = null, securityPin = null) {
+    try {
+      const user = window.CCMS.storage.authenticate(email, password, expectedRole, securityPin);
+      this.showToast('Login Successful', `Welcome back, ${user.name}! Redirecting...`, 'success');
+      
+      setTimeout(() => {
+        if (user.role === 'admin') {
+          window.location.href = 'admin-dashboard.html';
+        } else {
+          window.location.href = 'student-dashboard.html';
+        }
+      }, 700);
+
+      return user;
+    } catch (err) {
+      this.showToast('Authentication Failed', err.message, 'error');
+      throw err;
+    }
+  },
+
+  register(userData) {
+    try {
+      // Basic validation
+      if (!userData.name || userData.name.trim().length < 3) {
+        throw new Error('Please enter your full name (minimum 3 characters).');
+      }
+      if (!userData.email || !userData.email.includes('@')) {
+        throw new Error('Please provide a valid institutional email address.');
+      }
+      if (!userData.password || userData.password.length < 6) {
+        throw new Error('Password must be at least 6 characters long.');
+      }
+      if (!userData.rollNumber) {
+        throw new Error('Please provide your student roll number.');
+      }
+
+      const newUser = window.CCMS.storage.registerUser(userData);
+      window.CCMS.storage.setCurrentUser(newUser);
+
+      this.showToast('Registration Successful', `Account created for ${newUser.name}. Welcome to CCMS!`, 'success');
+
+      setTimeout(() => {
+        window.location.href = 'student-dashboard.html';
+      }, 800);
+
+      return newUser;
+    } catch (err) {
+      this.showToast('Registration Failed', err.message, 'error');
+      throw err;
+    }
+  },
+
+  logout() {
+    window.CCMS.storage.logout();
+    this.showToast('Logged Out', 'You have been successfully signed out of CCMS.', 'info');
+    setTimeout(() => {
+      window.location.href = 'index.html';
+    }, 500);
+  },
+
+  // 1-Click Demo Login
+  demoLogin(role) {
+    if (role === 'student') {
+      this.login('alex.chen@campus.edu', 'password123', 'student');
+    } else if (role === 'admin') {
+      this.showToast('Protected Access', 'Admin login requires confidential credentials and Master Security Key.', 'error');
+    }
+  },
+
+  // Toast Notification UI helper
+  showToast(title, message, type = 'info') {
+    let container = document.getElementById('ccmsToastContainer');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'ccmsToastContainer';
+      container.className = 'toast-container';
+      document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+
+    let iconClass = 'fa-solid fa-circle-info';
+    if (type === 'success') iconClass = 'fa-solid fa-circle-check';
+    if (type === 'error') iconClass = 'fa-solid fa-triangle-exclamation';
+
+    toast.innerHTML = `
+      <div class="toast-icon"><i class="${iconClass}"></i></div>
+      <div class="toast-content">
+        <div class="toast-title">${title}</div>
+        <div class="toast-message">${message}</div>
+      </div>
+    `;
+
+    container.appendChild(toast);
+
+    // Trigger animation
+    setTimeout(() => toast.classList.add('show'), 20);
+
+    // Auto dismiss after 4 seconds
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => toast.remove(), 350);
+    }, 4000);
+  }
+};
+
+window.CCMS.auth = AuthManager;
+
+/**
+ * COLLEGE COMPLAINT MANAGEMENT SYSTEM (CCMS)
+ * Student Dashboard Controller
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Verify Authentication
+  const currentUser = window.CCMS.auth.requireAuth('student');
+  if (!currentUser) return;
+
+  // Initialize Student UI & Logic
+  StudentApp.init(currentUser);
+});
+
+const StudentApp = {
+  currentUser: null,
+  activeCategory: 'Classroom',
+  attachedFileBase64: null,
+
+  init(user) {
+    this.currentUser = user;
+    this.bindHeaderInfo();
+    this.bindSidebarNavigation();
+    this.bindFormEvents();
+    this.bindFilterEvents();
+    this.bindNotifications();
+    this.refreshDashboardData();
+
+    // Check URL parameters for tab switching or tracking specific complaint
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetTab = urlParams.get('tab');
+    const trackId = urlParams.get('trackId');
+
+    if (targetTab) {
+      this.switchTab(targetTab);
+    }
+    if (trackId) {
+      this.switchTab('track');
+      document.getElementById('trackComplaintInput').value = trackId;
+      this.trackComplaint(trackId);
+    }
+  },
+
+  bindHeaderInfo() {
+    const nameEl = document.getElementById('studentNameDisplay');
+    const rollEl = document.getElementById('studentRollDisplay');
+    const avatarEl = document.getElementById('studentAvatarCircle');
+    const welcomeEl = document.getElementById('studentWelcomeName');
+
+    if (nameEl) nameEl.textContent = this.currentUser.name;
+    if (rollEl) rollEl.textContent = `${this.currentUser.rollNumber} • ${this.currentUser.department}`;
+    if (welcomeEl) welcomeEl.textContent = this.currentUser.name;
+
+    if (avatarEl) {
+      const initials = this.currentUser.name
+        .split(' ')
+        .map(n => n[0])
+        .join('')
+        .toUpperCase()
+        .substring(0, 2);
+      avatarEl.textContent = initials || 'ST';
+    }
+
+    // Populate Profile Tab
+    this.populateProfileTab();
+  },
+
+  populateProfileTab() {
+    const pName = document.getElementById('profName');
+    const pRoll = document.getElementById('profRoll');
+    const pEmail = document.getElementById('profEmail');
+    const pDept = document.getElementById('profDept');
+    const pYear = document.getElementById('profYear');
+    const pPhone = document.getElementById('profPhone');
+    const pHostel = document.getElementById('profHostel');
+
+    if (pName) pName.value = this.currentUser.name;
+    if (pRoll) pRoll.value = this.currentUser.rollNumber;
+    if (pEmail) pEmail.value = this.currentUser.email;
+    if (pDept) pDept.value = this.currentUser.department;
+    if (pYear) pYear.value = this.currentUser.year || '3rd Year';
+    if (pPhone) pPhone.value = this.currentUser.phone || '';
+    if (pHostel) pHostel.value = this.currentUser.hostel || '';
+  },
+
+  bindSidebarNavigation() {
+    const navButtons = document.querySelectorAll('.sidebar-nav .nav-item-btn');
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabTarget = btn.getAttribute('data-tab');
+        if (tabTarget) {
+          this.switchTab(tabTarget);
+        }
+      });
+    });
+
+    // Mobile sidebar toggle
+    const toggleBtn = document.getElementById('sidebarToggle');
+    const sidebar = document.querySelector('.app-sidebar');
+    const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+
+    if (toggleBtn && sidebar) {
+      toggleBtn.addEventListener('click', () => sidebar.classList.toggle('show'));
+    }
+    if (closeSidebarBtn && sidebar) {
+      closeSidebarBtn.addEventListener('click', () => sidebar.classList.remove('show'));
+    }
+
+    // Logout Button
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', () => {
+        if (confirm('Are you sure you want to sign out of the student portal?')) {
+          window.CCMS.auth.logout();
+        }
+      });
+    }
+  },
+
+  switchTab(tabId) {
+    // Update active nav button
+    document.querySelectorAll('.sidebar-nav .nav-item-btn').forEach(btn => {
+      if (btn.getAttribute('data-tab') === tabId) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
+    // Show active tab panel
+    document.querySelectorAll('.tab-view-panel').forEach(panel => {
+      if (panel.id === `tab-${tabId}`) {
+        panel.classList.add('active');
+      } else {
+        panel.classList.remove('active');
+      }
+    });
+
+    // Close mobile sidebar if open
+    const sidebar = document.querySelector('.app-sidebar');
+    if (sidebar && window.innerWidth <= 860) {
+      sidebar.classList.remove('show');
+    }
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  },
+
+  bindFormEvents() {
+    // Category Picker Selection
+    const categoryCards = document.querySelectorAll('.category-option-card');
+    categoryCards.forEach(card => {
+      card.addEventListener('click', () => {
+        categoryCards.forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        this.activeCategory = card.getAttribute('data-category');
+      });
+    });
+
+    // Attachment input handling with Base64 preview
+    const fileInput = document.getElementById('complaintAttachment');
+    const previewContainer = document.getElementById('attachmentPreviewWrap');
+
+    if (fileInput) {
+      fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) {
+          this.attachedFileBase64 = null;
+          if (previewContainer) previewContainer.innerHTML = '';
+          return;
+        }
+
+        if (file.size > 2 * 1024 * 1024) {
+          window.CCMS.auth.showToast('File Too Large', 'Please upload an attachment smaller than 2 MB.', 'error');
+          fileInput.value = '';
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          this.attachedFileBase64 = event.target.result;
+          if (previewContainer) {
+            previewContainer.innerHTML = `
+              <div style="display:flex; align-items:center; gap:0.5rem; background:#f1f5f9; padding:0.4rem 0.8rem; border-radius:6px; margin-top:0.5rem; font-size:0.8rem;">
+                <i class="fa-solid fa-paperclip text-purple"></i>
+                <span>${file.name} (${(file.size / 1024).toFixed(1)} KB)</span>
+                <button type="button" id="removeAttachmentBtn" style="margin-left:auto; color:#ef4444;"><i class="fa-solid fa-xmark"></i></button>
+              </div>
+            `;
+            document.getElementById('removeAttachmentBtn')?.addEventListener('click', () => {
+              fileInput.value = '';
+              this.attachedFileBase64 = null;
+              previewContainer.innerHTML = '';
+            });
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // New Complaint Form Submit
+    const complaintForm = document.getElementById('newComplaintForm');
+    if (complaintForm) {
+      complaintForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        this.submitNewComplaint();
+      });
+    }
+
+    // Profile Form Submit
+    const profileForm = document.getElementById('studentProfileForm');
+    if (profileForm) {
+      profileForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        this.updateProfile();
+      });
+    }
+
+    // Track Form
+    const trackForm = document.getElementById('trackComplaintForm');
+    if (trackForm) {
+      trackForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const id = document.getElementById('trackComplaintInput').value.trim();
+        if (id) {
+          this.trackComplaint(id);
+        }
+      });
+    }
+  },
+
+  submitNewComplaint() {
+    const titleInput = document.getElementById('complaintTitle');
+    const locationInput = document.getElementById('complaintLocation');
+    const prioritySelect = document.getElementById('complaintPriority');
+    const descInput = document.getElementById('complaintDescription');
+
+    const title = titleInput.value.trim();
+    const location = locationInput.value.trim();
+    const priority = prioritySelect.value;
+    const description = descInput.value.trim();
+
+    // Validation
+    let isValid = true;
+    if (title.length < 5) {
+      titleInput.classList.add('is-invalid');
+      isValid = false;
+    } else {
+      titleInput.classList.remove('is-invalid');
+    }
+
+    if (description.length < 15) {
+      descInput.classList.add('is-invalid');
+      isValid = false;
+    } else {
+      descInput.classList.remove('is-invalid');
+    }
+
+    if (!isValid) {
+      window.CCMS.auth.showToast('Validation Error', 'Please complete all required fields with sufficient details.', 'error');
+      return;
+    }
+
+    // Save
+    const complaintData = {
+      studentId: this.currentUser.id,
+      studentName: this.currentUser.name,
+      studentRoll: this.currentUser.rollNumber,
+      studentEmail: this.currentUser.email,
+      studentDept: this.currentUser.department,
+      studentPhone: this.currentUser.phone,
+      category: this.activeCategory,
+      title,
+      location,
+      priority,
+      description,
+      attachmentUrl: this.attachedFileBase64
+    };
+
+    const newComplaint = window.CCMS.storage.saveComplaint(complaintData);
+
+    // Reset Form
+    document.getElementById('newComplaintForm').reset();
+    this.attachedFileBase64 = null;
+    const previewWrap = document.getElementById('attachmentPreviewWrap');
+    if (previewWrap) previewWrap.innerHTML = '';
+
+    // Show Success Modal
+    this.showSubmissionSuccessModal(newComplaint);
+
+    // Refresh Dashboard Data
+    this.refreshDashboardData();
+  },
+
+  showSubmissionSuccessModal(complaint) {
+    const modalBackdrop = document.getElementById('submissionSuccessModal');
+    if (!modalBackdrop) return;
+
+    document.getElementById('newGeneratedIdText').textContent = complaint.id;
+    document.getElementById('newGeneratedTitleText').textContent = complaint.title;
+    document.getElementById('newGeneratedCategoryText').textContent = complaint.category;
+
+    modalBackdrop.classList.add('active');
+
+    // Button to track this new complaint
+    const trackBtn = document.getElementById('trackSubmittedComplaintBtn');
+    if (trackBtn) {
+      trackBtn.onclick = () => {
+        modalBackdrop.classList.remove('active');
+        this.switchTab('track');
+        document.getElementById('trackComplaintInput').value = complaint.id;
+        this.trackComplaint(complaint.id);
+      };
+    }
+
+    const closeBtn = document.getElementById('closeSuccessModalBtn');
+    if (closeBtn) {
+      closeBtn.onclick = () => modalBackdrop.classList.remove('active');
+    }
+  },
+
+  updateProfile() {
+    const phone = document.getElementById('profPhone').value.trim();
+    const hostel = document.getElementById('profHostel').value.trim();
+
+    const updated = window.CCMS.storage.updateProfile(this.currentUser.id, { phone, hostel });
+    this.currentUser = updated;
+    window.CCMS.auth.showToast('Profile Updated', 'Your contact and accommodation details have been updated.', 'success');
+  },
+
+  bindFilterEvents() {
+    // Search input
+    const searchInput = document.getElementById('myComplaintsSearch');
+    if (searchInput) {
+      searchInput.addEventListener('input', () => this.renderComplaintsTable());
+    }
+
+    // Status filter tabs
+    const statusPills = document.querySelectorAll('.status-filter-pill');
+    statusPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        statusPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        this.renderComplaintsTable();
+      });
+    });
+
+    // Category filter dropdown
+    const catSelect = document.getElementById('categoryFilterSelect');
+    if (catSelect) {
+      catSelect.addEventListener('change', () => this.renderComplaintsTable());
+    }
+  },
+
+  refreshDashboardData() {
+    const allComplaints = window.CCMS.storage.getComplaints();
+    // Filter by current student
+    const studentComplaints = allComplaints.filter(c => c.studentId === this.currentUser.id || c.studentEmail === this.currentUser.email);
+
+    // Compute Stats
+    const total = studentComplaints.length;
+    const pending = studentComplaints.filter(c => c.status === 'Pending').length;
+    const inProgress = studentComplaints.filter(c => c.status === 'In Progress').length;
+    const resolved = studentComplaints.filter(c => c.status === 'Resolved').length;
+
+    // Update Counter Elements
+    const totalEl = document.getElementById('statStudentTotal');
+    const pendingEl = document.getElementById('statStudentPending');
+    const progressEl = document.getElementById('statStudentProgress');
+    const resolvedEl = document.getElementById('statStudentResolved');
+
+    if (totalEl) totalEl.textContent = total;
+    if (pendingEl) pendingEl.textContent = pending;
+    if (progressEl) progressEl.textContent = inProgress;
+    if (resolvedEl) resolvedEl.textContent = resolved;
+
+    // Render Recent Complaints (Overview Tab)
+    this.renderRecentOverview(studentComplaints.slice(0, 4));
+
+    // Render Master Table (My Complaints Tab)
+    this.renderComplaintsTable();
+
+    // Update Notifications
+    this.updateNotificationBadge();
+  },
+
+  renderRecentOverview(complaints) {
+    const container = document.getElementById('recentComplaintsOverviewBody');
+    if (!container) return;
+
+    if (complaints.length === 0) {
+      container.innerHTML = `
+        <tr>
+          <td colspan="5" class="notif-empty">
+            <i class="fa-regular fa-folder-open text-muted" style="font-size:2rem; margin-bottom:0.5rem; display:block;"></i>
+            No grievances lodged yet. Click <strong>"Submit Complaint"</strong> to lodge a new facility issue.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    container.innerHTML = complaints.map(c => `
+      <tr>
+        <td><span class="table-id-pill">${c.id}</span></td>
+        <td>
+          <div style="font-weight:600; color:var(--primary-navy);">${this.escapeHTML(c.title)}</div>
+          <div style="font-size:0.75rem; color:var(--text-muted);"><i class="fa-solid fa-location-dot" style="margin-right:4px;"></i>${this.escapeHTML(c.location || 'Campus')}</div>
+        </td>
+        <td><span class="badge badge-category"><i class="${this.getCategoryIcon(c.category)}"></i> ${c.category}</span></td>
+        <td>${this.getStatusBadge(c.status)}</td>
+        <td>
+          <button class="btn btn-outline btn-sm" onclick="StudentApp.viewComplaintModal('${c.id}')">
+            <i class="fa-regular fa-eye"></i> Details
+          </button>
+        </td>
+      </tr>
+    `).join('');
+  },
+
+  renderComplaintsTable() {
+    const tbody = document.getElementById('myComplaintsTableBody');
+    if (!tbody) return;
+
+    const allComplaints = window.CCMS.storage.getComplaints();
+    let list = allComplaints.filter(c => c.studentId === this.currentUser.id || c.studentEmail === this.currentUser.email);
+
+    // Search filter
+    const searchVal = document.getElementById('myComplaintsSearch')?.value.toLowerCase().trim() || '';
+    if (searchVal) {
+      list = list.filter(c =>
+        c.id.toLowerCase().includes(searchVal) ||
+        c.title.toLowerCase().includes(searchVal) ||
+        c.category.toLowerCase().includes(searchVal) ||
+        (c.location && c.location.toLowerCase().includes(searchVal))
+      );
+    }
+
+    // Category filter
+    const catVal = document.getElementById('categoryFilterSelect')?.value || 'All';
+    if (catVal !== 'All') {
+      list = list.filter(c => c.category === catVal);
+    }
+
+    // Status filter
+    const activePill = document.querySelector('.status-filter-pill.active');
+    const statusVal = activePill ? activePill.getAttribute('data-status') : 'All';
+    if (statusVal && statusVal !== 'All') {
+      list = list.filter(c => c.status === statusVal);
+    }
+
+    if (list.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="7" class="notif-empty">
+            <i class="fa-solid fa-magnifying-glass text-muted" style="font-size:2rem; margin-bottom:0.5rem; display:block;"></i>
+            No matching complaints found for the selected criteria.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    tbody.innerHTML = list.map(c => `
+      <tr>
+        <td><span class="table-id-pill">${c.id}</span></td>
+        <td>
+          <div style="font-weight:700; color:var(--primary-navy); max-width:280px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">
+            ${this.escapeHTML(c.title)}
+          </div>
+          <div style="font-size:0.75rem; color:var(--text-muted);"><i class="fa-solid fa-location-dot" style="margin-right:4px;"></i>${this.escapeHTML(c.location || 'Campus')}</div>
+        </td>
+        <td><span class="badge badge-category"><i class="${this.getCategoryIcon(c.category)}"></i> ${c.category}</span></td>
+        <td>${this.getPriorityBadge(c.priority)}</td>
+        <td style="font-size:0.8rem; color:var(--text-muted); white-space:nowrap;">${c.submissionDate}</td>
+        <td>${this.getStatusBadge(c.status)}</td>
+        <td>
+          <div class="table-actions">
+            <button class="btn btn-outline btn-sm" onclick="StudentApp.viewComplaintModal('${c.id}')" title="View Full Details">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+            <button class="btn btn-subtle btn-sm" onclick="StudentApp.quickTrack('${c.id}')" title="Track Live Status">
+              <i class="fa-solid fa-timeline"></i>
+            </button>
+            ${c.status === 'Pending' ? `
+              <button class="btn btn-danger btn-sm" onclick="StudentApp.cancelComplaint('${c.id}')" title="Withdraw Complaint">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            ` : ''}
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  },
+
+  viewComplaintModal(id) {
+    const c = window.CCMS.storage.getComplaintById(id);
+    if (!c) return;
+
+    const modal = document.getElementById('complaintDetailModal');
+    if (!modal) return;
+
+    document.getElementById('modalDetailId').textContent = c.id;
+    document.getElementById('modalDetailCategory').innerHTML = `<i class="${this.getCategoryIcon(c.category)}"></i> ${c.category}`;
+    document.getElementById('modalDetailStatus').innerHTML = this.getStatusBadge(c.status);
+    document.getElementById('modalDetailPriority').innerHTML = this.getPriorityBadge(c.priority);
+    document.getElementById('modalDetailTitle').textContent = c.title;
+    document.getElementById('modalDetailLocation').textContent = c.location || 'Campus Premises';
+    document.getElementById('modalDetailDate').textContent = c.submissionDate;
+    document.getElementById('modalDetailDesc').textContent = c.description;
+    document.getElementById('modalDetailAssigned').textContent = c.assignedTo || 'Unassigned';
+    document.getElementById('modalDetailRemarks').textContent = c.adminRemarks || 'No administrative notes recorded yet.';
+
+    // Attachment
+    const attWrap = document.getElementById('modalDetailAttachmentWrap');
+    if (attWrap) {
+      if (c.attachmentUrl) {
+        attWrap.innerHTML = `
+          <div style="margin-top:0.75rem;">
+            <div style="font-weight:600; font-size:0.82rem; margin-bottom:0.35rem; color:var(--navy-muted);">Attachment:</div>
+            <img src="${c.attachmentUrl}" alt="Complaint Proof" style="max-height:180px; border-radius:8px; border:1px solid #e2e8f0; object-fit:cover;" />
+          </div>
+        `;
+      } else {
+        attWrap.innerHTML = '';
+      }
+    }
+
+    // History Timeline
+    const historyContainer = document.getElementById('modalDetailTimeline');
+    if (historyContainer && c.history) {
+      historyContainer.innerHTML = c.history.map(h => `
+        <div class="timeline-event">
+          <div class="timeline-dot"></div>
+          <div class="timeline-header">
+            <span class="timeline-title">${h.status}</span>
+            <span class="timeline-time">${h.date}</span>
+          </div>
+          <div class="timeline-desc">${this.escapeHTML(h.note)}</div>
+        </div>
+      `).join('');
+    }
+
+    modal.classList.add('active');
+
+    // Close button
+    const closeBtn = document.getElementById('closeDetailModalBtn');
+    if (closeBtn) {
+      closeBtn.onclick = () => modal.classList.remove('active');
+    }
+  },
+
+  quickTrack(id) {
+    this.switchTab('track');
+    const input = document.getElementById('trackComplaintInput');
+    if (input) input.value = id;
+    this.trackComplaint(id);
+  },
+
+  trackComplaint(id) {
+    const c = window.CCMS.storage.getComplaintById(id);
+    const resultBox = document.getElementById('trackResultContainer');
+    if (!resultBox) return;
+
+    if (!c) {
+      resultBox.innerHTML = `
+        <div style="text-align:center; padding:3rem 1rem; color:var(--text-muted);">
+          <i class="fa-solid fa-triangle-exclamation text-danger" style="font-size:2.5rem; margin-bottom:1rem; display:block;"></i>
+          <h3 style="color:var(--primary-navy); margin-bottom:0.5rem;">No Complaint Found</h3>
+          <p style="font-size:0.92rem;">We could not locate any grievance registered with ID: <strong>"${this.escapeHTML(id)}"</strong>. Please double-check the tracking ID.</p>
+        </div>
+      `;
+      return;
+    }
+
+    // Determine Stepper Active Step
+    // Step 1: Lodged, Step 2: Under Review / Assigned, Step 3: In Progress, Step 4: Resolved
+    let stepNum = 1;
+    let fillWidth = '0%';
+    if (c.status === 'Pending') {
+      stepNum = 1;
+      fillWidth = '15%';
+    } else if (c.status === 'In Progress') {
+      stepNum = 3;
+      fillWidth = '66%';
+    } else if (c.status === 'Resolved') {
+      stepNum = 4;
+      fillWidth = '100%';
+    }
+
+    resultBox.innerHTML = `
+      <div style="border-bottom:1px solid var(--border-light); padding-bottom:1.25rem; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+        <div>
+          <span class="table-id-pill" style="font-size:0.95rem; padding:0.3rem 0.75rem;">${c.id}</span>
+          <h2 style="font-size:1.35rem; font-weight:800; color:var(--primary-navy); margin-top:0.4rem;">${this.escapeHTML(c.title)}</h2>
+          <div style="font-size:0.85rem; color:var(--text-muted); display:flex; gap:1rem; margin-top:0.25rem; flex-wrap:wrap;">
+            <span><i class="${this.getCategoryIcon(c.category)}"></i> ${c.category}</span>
+            <span><i class="fa-solid fa-location-dot"></i> ${this.escapeHTML(c.location || 'Campus')}</span>
+            <span><i class="fa-regular fa-calendar"></i> Lodged on ${c.submissionDate}</span>
+          </div>
+        </div>
+        <div>
+          ${this.getStatusBadge(c.status)}
+        </div>
+      </div>
+
+      <!-- Stepper Progress Bar -->
+      <div class="stepper-progress-bar">
+        <div class="stepper-progress-fill" style="width: ${fillWidth};"></div>
+
+        <div class="step-node completed">
+          <div class="step-circle"><i class="fa-solid fa-check"></i></div>
+          <div class="step-label">1. Lodged</div>
+        </div>
+
+        <div class="step-node ${stepNum >= 2 ? (stepNum > 2 ? 'completed' : 'active') : ''}">
+          <div class="step-circle">${stepNum > 2 ? '<i class="fa-solid fa-check"></i>' : '2'}</div>
+          <div class="step-label">2. Under Review</div>
+        </div>
+
+        <div class="step-node ${stepNum >= 3 ? (stepNum > 3 ? 'completed' : 'active') : ''}">
+          <div class="step-circle">${stepNum > 3 ? '<i class="fa-solid fa-check"></i>' : '3'}</div>
+          <div class="step-label">3. In Progress</div>
+        </div>
+
+        <div class="step-node ${stepNum === 4 ? 'completed' : ''}">
+          <div class="step-circle">${stepNum === 4 ? '<i class="fa-solid fa-check"></i>' : '4'}</div>
+          <div class="step-label">4. Resolved</div>
+        </div>
+      </div>
+
+      <!-- Detailed Info Grid -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.25rem; margin-top:3.5rem;">
+        <div style="background:#f8fafc; border-radius:var(--radius-md); padding:1.25rem; border:1px solid #e2e8f0;">
+          <h4 style="font-size:0.9rem; font-weight:700; color:var(--primary-navy); margin-bottom:0.75rem;">
+            <i class="fa-solid fa-user-gear text-purple" style="margin-right:6px;"></i> Assigned Division
+          </h4>
+          <p style="font-size:0.88rem; color:var(--navy-muted); font-weight:600;">${c.assignedTo || 'Under initial review by Student Welfare Office'}</p>
+        </div>
+
+        <div style="background:#f8fafc; border-radius:var(--radius-md); padding:1.25rem; border:1px solid #e2e8f0;">
+          <h4 style="font-size:0.9rem; font-weight:700; color:var(--primary-navy); margin-bottom:0.75rem;">
+            <i class="fa-solid fa-clipboard-check text-purple" style="margin-right:6px;"></i> Latest Administrative Remarks
+          </h4>
+          <p style="font-size:0.88rem; color:var(--navy-muted);">${c.adminRemarks || 'No updates added yet.'}</p>
+        </div>
+      </div>
+
+      <!-- Timeline History -->
+      <div style="margin-top:2rem;">
+        <h4 style="font-size:1rem; font-weight:700; color:var(--primary-navy); margin-bottom:1rem;">
+          <i class="fa-solid fa-clock-rotate-left text-purple" style="margin-right:6px;"></i> Resolution Activity Log
+        </h4>
+        <div class="history-timeline">
+          ${c.history ? c.history.map(h => `
+            <div class="timeline-event">
+              <div class="timeline-dot"></div>
+              <div class="timeline-header">
+                <span class="timeline-title">${h.status}</span>
+                <span class="timeline-time">${h.date}</span>
+              </div>
+              <div class="timeline-desc">${this.escapeHTML(h.note)}</div>
+            </div>
+          `).join('') : '<p style="color:var(--text-muted); font-size:0.85rem;">No historical entries found.</p>'}
+        </div>
+      </div>
+    `;
+  },
+
+  cancelComplaint(id) {
+    if (confirm(`Are you sure you want to withdraw complaint ${id}? This action cannot be undone.`)) {
+      window.CCMS.storage.deleteComplaint(id, 'Withdrawn by student');
+      window.CCMS.auth.showToast('Complaint Withdrawn', `Grievance ${id} has been cancelled.`, 'info');
+      this.refreshDashboardData();
+    }
+  },
+
+  // Notifications
+  bindNotifications() {
+    const trigger = document.getElementById('notifTriggerBtn');
+    const dropdown = document.getElementById('notifDropdown');
+    const markReadBtn = document.getElementById('markAllReadBtn');
+
+    if (trigger && dropdown) {
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('show');
+        this.renderNotificationsList();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target) && e.target !== trigger) {
+          dropdown.classList.remove('show');
+        }
+      });
+    }
+
+    if (markReadBtn) {
+      markReadBtn.addEventListener('click', () => {
+        window.CCMS.storage.markAllNotificationsRead(this.currentUser.id);
+        this.updateNotificationBadge();
+        this.renderNotificationsList();
+        window.CCMS.auth.showToast('Updated', 'All notifications marked as read.', 'info');
+      });
+    }
+  },
+
+  updateNotificationBadge() {
+    const badge = document.getElementById('notifBadgeCount');
+    if (!badge) return;
+
+    const notifs = window.CCMS.storage.getNotifications(this.currentUser.id);
+    const unreadCount = notifs.filter(n => !n.read).length;
+
+    if (unreadCount > 0) {
+      badge.textContent = unreadCount;
+      badge.style.display = 'flex';
+    } else {
+      badge.style.display = 'none';
+    }
+  },
+
+  renderNotificationsList() {
+    const listContainer = document.getElementById('notifItemsList');
+    if (!listContainer) return;
+
+    const notifs = window.CCMS.storage.getNotifications(this.currentUser.id);
+    if (notifs.length === 0) {
+      listContainer.innerHTML = '<div class="notif-empty">No notifications yet. You will be notified when administrators review or resolve your complaints.</div>';
+      return;
+    }
+
+    listContainer.innerHTML = notifs.map(n => `
+      <li class="notif-item ${!n.read ? 'unread' : ''}" onclick="StudentApp.handleNotifClick('${n.complaintId}')">
+        <div class="notif-item-icon">
+          <i class="fa-solid fa-bell"></i>
+        </div>
+        <div class="notif-item-body">
+          <h6>${this.escapeHTML(n.title)}</h6>
+          <p>${this.escapeHTML(n.message)}</p>
+          <div class="notif-item-time">${n.date}</div>
+        </div>
+      </li>
+    `).join('');
+  },
+
+  handleNotifClick(complaintId) {
+    if (complaintId) {
+      document.getElementById('notifDropdown')?.classList.remove('show');
+      this.switchTab('track');
+      document.getElementById('trackComplaintInput').value = complaintId;
+      this.trackComplaint(complaintId);
+    }
+  },
+
+  // Helper formatting badges
+  getStatusBadge(status) {
+    if (status === 'Resolved') {
+      return '<span class="badge badge-resolved"><i class="fa-solid fa-circle-check"></i> Resolved</span>';
+    } else if (status === 'In Progress') {
+      return '<span class="badge badge-progress"><i class="fa-solid fa-rotate"></i> In Progress</span>';
+    } else {
+      return '<span class="badge badge-pending"><i class="fa-regular fa-clock"></i> Pending</span>';
+    }
+  },
+
+  getPriorityBadge(priority) {
+    const p = (priority || 'Medium').toLowerCase();
+    return `<span class="badge badge-priority-${p}">${priority || 'Medium'}</span>`;
+  },
+
+  getCategoryIcon(category) {
+    const map = {
+      'Classroom': 'fa-solid fa-chalkboard-user',
+      'Laboratory': 'fa-solid fa-flask-vial',
+      'College Wi-Fi': 'fa-solid fa-wifi',
+      'Drinking Water': 'fa-solid fa-glass-water',
+      'Washroom': 'fa-solid fa-restroom',
+      'Library': 'fa-solid fa-book-bookmark',
+      'Transportation': 'fa-solid fa-bus-simple',
+      'Other': 'fa-solid fa-cubes'
+    };
+    return map[category] || 'fa-solid fa-circle-exclamation';
+  },
+
+  escapeHTML(str) {
+    if (!str) return '';
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+};
+
+window.StudentApp = StudentApp;
+
+</script>
+</body>
+</html>
